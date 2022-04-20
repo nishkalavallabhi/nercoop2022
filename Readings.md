@@ -20,7 +20,7 @@
 [Few-NERD: A Few-Shot Named Entity Recognition Dataset](https://arxiv.org/abs/2105.07464)  
 [Few-shot Named Entity Recognition with Self-describing Networks](https://arxiv.org/abs/2203.12252), to appear in ACL 2022   
 [CONTaiNER: Few-Shot Named Entity Recognition via Contrastive Learning](https://arxiv.org/abs/2109.07589), to appear in ACL 2022  
-[Good Examples Make A Faster Learner: Simple Demonstration-based Learning for Low-resource NER](https://arxiv.org/abs/2110.08454), to appear in ACL 2022
+[Good Examples Make A Faster Learner: Simple Demonstration-based Learning for Low-resource NER](https://arxiv.org/abs/2110.08454), to appear in ACL 2022  
 [MELM: Data Augmentation with Masked Entity Language Modeling for Low-Resource NER](https://arxiv.org/abs/2108.13655), to appear in ACL 2022
 
 **Data Augmentation and Adversarial inputs for NER**  
