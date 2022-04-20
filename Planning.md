@@ -10,9 +10,10 @@
 
 **Task 2: Understanding various topics in NER context** 
 (2 weeks? -May 15-30 2022)  
-- weak supervision (familiarity with libraries such as: skweak, knodle, flying squid)  
+- weak supervision (familiarity with libraries such as: skweak, knodle, flying squid, astra)  
 - domain adaptation, few short learning  
 - prompt based learning
+- exercise: how can you create more examples to identify NORP (see description in Onotonotes dataset guidelines) in CONLL-03 NER corpus (it doesn't have that category annotated specifically). 
 
 **Task 3: Multilingual NER exercise**  
 (2 weeks? - June 1-15 2022)  
@@ -20,11 +21,12 @@
 - goal: to familiarize with the training, tuning, comparisons process  
 - can use multiconer dataset or anyother.  
 -libraries that support training and fine-tuning language models for NER such as [tner](https://github.com/asahi417/tner) , [NERDA](https://github.com/ebanalyse/NERDA/tree/main/src/NERDA), [ACE](https://github.com/Alibaba-NLP/ACE), Flair, Spacy etc  
+- Exercise: training a multilingual ner model?
 
 **Task 4: Under-represented tags**  
 Exploring methods to get better at predicting NE tags that are under-represented in the training set
 - will data augmentation work?
-- some other way? 
+- is there another way we can explore? 
 (2 weeks? - June 15-30 2022)
 
 **Task 5: Domain adaptation**
