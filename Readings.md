@@ -7,6 +7,8 @@
 - [A Survey in Adversarial Defences and Robustness in NLP](https://arxiv.org/abs/2203.06414)  
 - [Weak supervision](https://www.snorkel.org/blog/weak-supervision), a general overview on Snorkel blog.   
 - [Few shot learning](https://analyticsindiamag.com/an-introductory-guide-to-few-shot-learning-for-beginners/) - an overview blog post. [a listing of papers on the topic](https://github.com/zhjohnchan/awesome-few-shot-learning-in-nlp#survey)
+- [Named Entity Recognition without Labelled Data: A Weak Supervision Approach](https://aclanthology.org/2020.acl-main.139/), ACL 2020
+
 
 **NER Datasets**
 - [from nlpprogress.com](http://nlpprogress.com/english/named_entity_recognition.html)  
