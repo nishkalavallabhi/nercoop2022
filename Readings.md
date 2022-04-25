@@ -16,18 +16,19 @@
 - [HIPE 2022 shared task datasets](https://github.com/hipe-eval/HIPE-2022-data)
 
 **NER in various low resource settings**  
-[DoCoGen: Domain Counterfactual Generation for Low Resource Domain Adaptation](https://arxiv.org/abs/2202.12350)  
-[Few-NERD: A Few-Shot Named Entity Recognition Dataset](https://arxiv.org/abs/2105.07464)  
+[Few-NERD: A Few-Shot Named Entity Recognition Dataset](https://arxiv.org/abs/2105.07464), ACL 2021    
+[DoCoGen: Domain Counterfactual Generation for Low Resource Domain Adaptation](https://arxiv.org/abs/2202.12350), ACL 2022     
 [Few-shot Named Entity Recognition with Self-describing Networks](https://arxiv.org/abs/2203.12252), to appear in ACL 2022   
 [CONTaiNER: Few-Shot Named Entity Recognition via Contrastive Learning](https://arxiv.org/abs/2109.07589), to appear in ACL 2022  
 [Good Examples Make A Faster Learner: Simple Demonstration-based Learning for Low-resource NER](https://arxiv.org/abs/2110.08454), to appear in ACL 2022  
-[MELM: Data Augmentation with Masked Entity Language Modeling for Low-Resource NER](https://arxiv.org/abs/2108.13655), to appear in ACL 2022
+[MELM: Data Augmentation with Masked Entity Language Modeling for Low-Resource NER](https://arxiv.org/abs/2108.13655), to appear in ACL 2022    
 
-**Data Augmentation and Adversarial inputs for NER**  
+**Data Augmentation, Adversarial inputs, and other ways of transforming NER datasets**  
 [SeqMix: Augmenting Active Sequence Labeling via Sequence Mixup](https://rongzhizhang.org/pdf/emnlp20_SeqMix.pdf), EMNLP 2020    
 [Counterfactual Generator: A Weakly-Supervised Method for Named Entity Recognition](https://aclanthology.org/2020.emnlp-main.590/), EMNLP 2020    
-[RockNER: A Simple Method to Create Adversarial Examples for Evaluating the Robustness of Named Entity Recognition Models](https://aclanthology.org/2021.emnlp-main.302/), EMNLP 2021      
+[A Rigorous Study on Named Entity Recognition: Can Fine-tuning Pretrained Model Lead to the Promised Land?](https://aclanthology.org/2020.emnlp-main.592.pdf), EMNLP 2020  
 [Entity-Switched Datasets: An Approach to Auditing the In-Domain Robustness of Named Entity Recognition Models](https://arxiv.org/abs/2004.04123), ArXiv, 2020  
+[RockNER: A Simple Method to Create Adversarial Examples for Evaluating the Robustness of Named Entity Recognition Models](https://aclanthology.org/2021.emnlp-main.302/), EMNLP 2021      
 [What do we really know about State of the Art NER?](), LREC 2022   
 
 #**Multilingual NER**  
