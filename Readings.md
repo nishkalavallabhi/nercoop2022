@@ -30,7 +30,8 @@
 
 **other SOTA NER**  
 [Partially Supervised Named Entity Recognition via the Expected Entity Ratio Loss](https://transacl.org/ojs/index.php/tacl/article/view/2981), TACL 2021. 
-[kNN-NER: Named Entity Recognition with Nearest Neighbor Search](https://arxiv.org/abs/2203.17103), ArXiv, 2022
-[Parallel Instance Query Network for Named Entity Recognition](https://arxiv.org/abs/2203.10545), to appear in ACL 2022
-[A Unified MRC Framework for Named Entity Recognition](https://aclanthology.org/2020.acl-main.519.pdf), ACL 2020
+[Context-aware adversarial training for name regularity bias in named entity recognition](https://aclanthology.org/2021.tacl-1.36/), TACL 2021.  
+[kNN-NER: Named Entity Recognition with Nearest Neighbor Search](https://arxiv.org/abs/2203.17103), ArXiv, 2022  
+[Parallel Instance Query Network for Named Entity Recognition](https://arxiv.org/abs/2203.10545), to appear in ACL 2022  
+[A Unified MRC Framework for Named Entity Recognition](https://aclanthology.org/2020.acl-main.519.pdf), ACL 2020  
 
