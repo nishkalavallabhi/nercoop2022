@@ -24,11 +24,16 @@
 [MELM: Data Augmentation with Masked Entity Language Modeling for Low-Resource NER](https://arxiv.org/abs/2108.13655), to appear in ACL 2022
 
 **Data Augmentation and Adversarial inputs for NER**  
-[SeqMix: Augmenting Active Sequence Labeling via Sequence Mixup](https://rongzhizhang.org/pdf/emnlp20_SeqMix.pdf), EMNLP 2020
+[SeqMix: Augmenting Active Sequence Labeling via Sequence Mixup](https://rongzhizhang.org/pdf/emnlp20_SeqMix.pdf), EMNLP 2020    
+[Counterfactual Generator: A Weakly-Supervised Method for Named Entity Recognition](https://aclanthology.org/2020.emnlp-main.590/), EMNLP 2020    
+[RockNER: A Simple Method to Create Adversarial Examples for Evaluating the Robustness of Named Entity Recognition Models](https://aclanthology.org/2021.emnlp-main.302/), EMNLP 2021      
+[Entity-Switched Datasets: An Approach to Auditing the In-Domain Robustness of Named Entity Recognition Models](https://arxiv.org/abs/2004.04123), ArXiv, 2020  
+[What do we really know about State of the Art NER?](), LREC 2022   
 
 #**Multilingual NER**  
 
 **other SOTA NER**  
+[Interpretability Analysis for Named Entity Recognition to Understand System Predictions and How They Can Improve](https://aclanthology.org/2021.cl-1.5/), CL 2021   
 [Partially Supervised Named Entity Recognition via the Expected Entity Ratio Loss](https://transacl.org/ojs/index.php/tacl/article/view/2981), TACL 2021.   
 [Context-aware adversarial training for name regularity bias in named entity recognition](https://aclanthology.org/2021.tacl-1.36/), TACL 2021.  
 [kNN-NER: Named Entity Recognition with Nearest Neighbor Search](https://arxiv.org/abs/2203.17103), ArXiv, 2022  
