@@ -7,8 +7,12 @@
 - [A Survey in Adversarial Defences and Robustness in NLP](https://arxiv.org/abs/2203.06414)  
 - [Weak supervision](https://www.snorkel.org/blog/weak-supervision), a general overview on Snorkel blog.   
 - [Few shot learning](https://analyticsindiamag.com/an-introductory-guide-to-few-shot-learning-for-beginners/) - an overview blog post. [a listing of papers on the topic](https://github.com/zhjohnchan/awesome-few-shot-learning-in-nlp#survey)
-- [Named Entity Recognition without Labelled Data: A Weak Supervision Approach](https://aclanthology.org/2020.acl-main.139/), ACL 2020
 
+**NER: Overview of main approaches:**    
+- [Named Entity Recognition: A Literature Survey](https://www.cfilt.iitb.ac.in/resources/surveys/rahul-ner-survey.pdf), 2014 Technical report.   
+- [A Survey on Recent Advances in Named Entity Recognition from Deep Learning models](https://arxiv.org/pdf/1910.11470.pdf), COLING 2018  
+- [SpanNER: Named Entity Re-/Recognition as Span Prediction](https://aclanthology.org/2021.acl-long.558/), ACL 2021  
+- [Named Entity Recognition without Labelled Data: A Weak Supervision Approach](https://aclanthology.org/2020.acl-main.139/), ACL 2020
 
 **NER Datasets**
 - [from nlpprogress.com](http://nlpprogress.com/english/named_entity_recognition.html)  
@@ -33,8 +37,6 @@
 [What do we really know about State of the Art NER?](), LREC 2022    
 [Leveraging Expert Guided Adversarial Augmentation For Improving Generalization in Named Entity Recognition](https://arxiv.org/abs/2203.10693), Findings of ACL 2022.  
 
-#**Multilingual NER**  
-
 **other SOTA NER**  
 [Interpretability Analysis for Named Entity Recognition to Understand System Predictions and How They Can Improve](https://aclanthology.org/2021.cl-1.5/), CL 2021   
 [Partially Supervised Named Entity Recognition via the Expected Entity Ratio Loss](https://transacl.org/ojs/index.php/tacl/article/view/2981), TACL 2021.   
@@ -44,4 +46,5 @@
 [A Unified MRC Framework for Named Entity Recognition](https://aclanthology.org/2020.acl-main.519.pdf), ACL 2020  
 [MINER: Improving Out-of-Vocabulary Named Entity Recognition from an Information Theoretic Perspective](https://arxiv.org/abs/2204.04391), ACL 2022   
 
-
+**Multilingual NER**    
+TODO
