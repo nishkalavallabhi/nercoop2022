@@ -29,7 +29,8 @@
 [A Rigorous Study on Named Entity Recognition: Can Fine-tuning Pretrained Model Lead to the Promised Land?](https://aclanthology.org/2020.emnlp-main.592.pdf), EMNLP 2020  
 [Entity-Switched Datasets: An Approach to Auditing the In-Domain Robustness of Named Entity Recognition Models](https://arxiv.org/abs/2004.04123), ArXiv, 2020  
 [RockNER: A Simple Method to Create Adversarial Examples for Evaluating the Robustness of Named Entity Recognition Models](https://aclanthology.org/2021.emnlp-main.302/), EMNLP 2021      
-[What do we really know about State of the Art NER?](), LREC 2022   
+[What do we really know about State of the Art NER?](), LREC 2022    
+[Leveraging Expert Guided Adversarial Augmentation For Improving Generalization in Named Entity Recognition](https://arxiv.org/abs/2203.10693), Findings of ACL 2022.  
 
 #**Multilingual NER**  
 
