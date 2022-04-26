@@ -18,10 +18,11 @@
 **NER in various low resource settings**  
 [Few-NERD: A Few-Shot Named Entity Recognition Dataset](https://arxiv.org/abs/2105.07464), ACL 2021    
 [DoCoGen: Domain Counterfactual Generation for Low Resource Domain Adaptation](https://arxiv.org/abs/2202.12350), ACL 2022     
-[Few-shot Named Entity Recognition with Self-describing Networks](https://arxiv.org/abs/2203.12252), to appear in ACL 2022   
-[CONTaiNER: Few-Shot Named Entity Recognition via Contrastive Learning](https://arxiv.org/abs/2109.07589), to appear in ACL 2022  
-[Good Examples Make A Faster Learner: Simple Demonstration-based Learning for Low-resource NER](https://arxiv.org/abs/2110.08454), to appear in ACL 2022  
-[MELM: Data Augmentation with Masked Entity Language Modeling for Low-Resource NER](https://arxiv.org/abs/2108.13655), to appear in ACL 2022    
+[Few-shot Named Entity Recognition with Self-describing Networks](https://arxiv.org/abs/2203.12252), ACL 2022   
+[CONTaiNER: Few-Shot Named Entity Recognition via Contrastive Learning](https://arxiv.org/abs/2109.07589), ACL 2022  
+[Good Examples Make A Faster Learner: Simple Demonstration-based Learning for Low-resource NER](https://arxiv.org/abs/2110.08454), ACL 2022  
+[MELM: Data Augmentation with Masked Entity Language Modeling for Low-Resource NER](https://arxiv.org/abs/2108.13655), ACL 2022    
+[Label Semantics for Few Shot Named Entity Recognition](https://arxiv.org/abs/2203.08985), Findings of ACL 2022
 
 **Data Augmentation, Adversarial inputs, and other ways of transforming NER datasets**  
 [SeqMix: Augmenting Active Sequence Labeling via Sequence Mixup](https://rongzhizhang.org/pdf/emnlp20_SeqMix.pdf), EMNLP 2020    
