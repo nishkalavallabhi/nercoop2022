@@ -42,4 +42,6 @@
 [kNN-NER: Named Entity Recognition with Nearest Neighbor Search](https://arxiv.org/abs/2203.17103), ArXiv, 2022  
 [Parallel Instance Query Network for Named Entity Recognition](https://arxiv.org/abs/2203.10545), to appear in ACL 2022  
 [A Unified MRC Framework for Named Entity Recognition](https://aclanthology.org/2020.acl-main.519.pdf), ACL 2020  
+[MINER: Improving Out-of-Vocabulary Named Entity Recognition from an Information Theoretic Perspective](https://arxiv.org/abs/2204.04391), ACL 2022   
+
 
