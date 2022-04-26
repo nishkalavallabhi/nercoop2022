@@ -49,5 +49,6 @@
 [A Unified MRC Framework for Named Entity Recognition](https://aclanthology.org/2020.acl-main.519.pdf), ACL 2020  
 [MINER: Improving Out-of-Vocabulary Named Entity Recognition from an Information Theoretic Perspective](https://arxiv.org/abs/2204.04391), ACL 2022   
 
-**Multilingual NER**    
+**Multi/Cross-lingual NER**    
+[An Unsupervised Multiple-Task and Multiple-Teacher Model for Cross-lingual Named Entity Recognition](), ACL 2022.  
 TODO
