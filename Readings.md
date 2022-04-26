@@ -12,17 +12,19 @@
 **NER: Overview of main approaches:**    
 - [Named Entity Recognition: A Literature Survey](https://www.cfilt.iitb.ac.in/resources/surveys/rahul-ner-survey.pdf), 2014 Technical report.   
 - [A Survey on Recent Advances in Named Entity Recognition from Deep Learning models](https://arxiv.org/pdf/1910.11470.pdf), COLING 2018  
-- [SpanNER: Named Entity Re-/Recognition as Span Prediction](https://aclanthology.org/2021.acl-long.558/), ACL 2021  
-- [Named Entity Recognition without Labelled Data: A Weak Supervision Approach](https://aclanthology.org/2020.acl-main.139/), ACL 2020
+- [SpanNER: Named Entity Re-/Recognition as Span Prediction](https://aclanthology.org/2021.acl-long.558/), ACL 2021. [Code](https://github.com/neulab/SpanNER)  
+- [Named Entity Recognition without Labelled Data: A Weak Supervision Approach](https://aclanthology.org/2020.acl-main.139/), ACL 2020  [Code](https://github.com/NorskRegnesentral/skweak)   
 
 **NER Datasets**
 - [from nlpprogress.com](http://nlpprogress.com/english/named_entity_recognition.html)  
 - [multiconer shared task datasets](https://multiconer.github.io/)
 - [HIPE 2022 shared task datasets](https://github.com/hipe-eval/HIPE-2022-data)
 
+(several of these papers below share their code repo - I am not adding them - we can always look for them if needed. There is no guarantee the code works, though)  
 **NER in various low resource settings**  
 [Few-NERD: A Few-Shot Named Entity Recognition Dataset](https://arxiv.org/abs/2105.07464), ACL 2021    
-[DoCoGen: Domain Counterfactual Generation for Low Resource Domain Adaptation](https://arxiv.org/abs/2202.12350), ACL 2022     
+[DoCoGen: Domain Counterfactual Generation for Low Resource Domain Adaptation](https://arxiv.org/abs/2202.12350), ACL 2022
+[code](https://github.com/nitaytech/DoCoGen)     
 [Few-shot Named Entity Recognition with Self-describing Networks](https://arxiv.org/abs/2203.12252), ACL 2022   
 [CONTaiNER: Few-Shot Named Entity Recognition via Contrastive Learning](https://arxiv.org/abs/2109.07589), ACL 2022  
 [Good Examples Make A Faster Learner: Simple Demonstration-based Learning for Low-resource NER](https://arxiv.org/abs/2110.08454), ACL 2022  
