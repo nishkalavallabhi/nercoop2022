@@ -51,4 +51,5 @@
 
 **Multi/Cross-lingual NER**    
 [An Unsupervised Multiple-Task and Multiple-Teacher Model for Cross-lingual Named Entity Recognition](), ACL 2022.  
+[Composable Sparse Fine-Tuning for Cross-Lingual Transfer](https://arxiv.org/abs/2110.07560), ACL 2022. [Code](https://github.com/cambridgeltl/composable-sft)  
 TODO
