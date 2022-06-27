@@ -4,7 +4,8 @@
 Weak supervision approach to go perform NER on the MULTICO-NER Dataset.
 
 ### File Structure 
-<b>SkWeak folder</b>- contains all the utilites and functions for running skweak
+<b>SkWeak folder</b> - contains all the utilites and functions for running skweak.
+<b>conll2jsonparse.py</b> - code to convert the ner data from conll format to spacy's json format. 
 <b>LabelNER.py</b> - contains labelling functions for detecting the primary entities - LOC, ORG, PER and MISC. <br>
 <b>LabelNER_mconer.py</b> - contains labelling functions for detecting entities(LOC, PER, GRP, CORP, PROD, CW) from the mconer dataset .<br>
 <b>skw.py</b> - code for aggregating and applying the labelling functions to create noisy labels for a dataset.<br>
