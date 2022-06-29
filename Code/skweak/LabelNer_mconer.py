@@ -1,6 +1,7 @@
 from typing import Iterable, Tuple
 import re, json, os
 # import snips_nlu_parsers
+# import torch
 import skweak
 from skweak.base import CombinedAnnotator, SpanAnnotator
 from skweak.spacy import ModelAnnotator, TruecaseAnnotator
@@ -14,10 +15,21 @@ from spacy.tokens import Doc, Span  # type: ignore
 import sys
 sys.path.append('examples/ner')
 import data_utils
+import spacy
+from spacy.training import Example
+from spacy.tokens import DocBin
+import torch
+from tner import TransformersNER
+
+# import spacy-transformers
+
 
 # Data files for gazetteers
 # WIKIDATA = os.path.dirname(__file__) + "/../../data/wikidata_tokenised.json"
 WIKIDATA_SMALL = "data/wikidata_small_tokenised.json"
+GPE = "data/Gpe.json"
+LOC = "data/loc.json"
+PERSON = "data/Person_names.json"
 # COMPANY_NAMES = "data/company_names_tokenised.json"
 GEONAMES = "data/geonames.json"
 CRUNCHBASE = "data/crunchbase.json"
@@ -64,17 +76,17 @@ class Standardiser(SpanAnnotator):
                   continue
               elif span.label_ in {"person", "PERSON", "PER"}:
                   new_spans.append(Span(doc, span.start, span.end, label="PER"))
-              elif span.label_ in {"ORGANIZATION", "ORGANISATION", "COMPANY", "group", "GROUP"}:
+              elif span.label_ in {"ORGANIZATION", "ORGANISATION", "COMPANY", "group", "GROUP", "GRP"}:
                   new_spans.append(Span(doc, span.start, span.end, label="GRP"))
-              elif span.label_ in {"corporation", "CORPORATION", "ORG"}:
+              elif span.label_ in {"corporation", "CORPORATION", "ORG", "CORP"}:
                   new_spans.append(Span(doc, span.start, span.end, label="CORP"))
-              elif span.label_ in {"location", "GPE", "LOCATION"}:
+              elif span.label_ in {"location", "GPE", "LOCATION", "gpe", "loc"}:
                   new_spans.append(Span(doc, span.start, span.end, label="LOC"))
               # elif span.label_ in {"EVENT", "FAC", "LANGUAGE", "LAW", "NORP", "WORK_OF_ART", "creative-work"}:
               #     new_spans.append(Span(doc, span.start, span.end, label="MISC"))
-              elif span.label_ in {"product", "PRODUCT"}:
+              elif span.label_ in {"product", "PRODUCT", "PROD"}:
                   new_spans.append(Span(doc, span.start, span.end, label="PROD"))
-              elif span.label_ in {"WORK_OF_ART", "creative-work"}:
+              elif span.label_ in {"WORK_OF_ART", "creative-work", "CW", "work of art"}:
                   new_spans.append(Span(doc, span.start, span.end, label="CW"))
               else:
                   new_spans.append(span)         
@@ -100,7 +112,9 @@ class NERAnnotator(CombinedAnnotator):
         return self
 
     def add_shallow(self):
-      proper_detector = skweak.heuristics.TokenConstraintAnnotator("proper_detector", skweak.utils.is_likely_proper, "ENT")
+
+      wnut_tner = FunctionAnnotator("wnut_tner", wnut_detector)
+      proper_detector = TokenConstraintAnnotator("proper_detector", skweak.utils.is_likely_proper, "ENT")
       nnp_detector = TokenConstraintAnnotator("nnp_detector", lambda tok: tok.tag_ in {"NNP", "NNPS"}, "ENT")
 
         # Detection based on dependency relations (compound phrases)
@@ -123,9 +137,11 @@ class NERAnnotator(CombinedAnnotator):
       company_type_detector = SpanConstraintAnnotator("company_type_detector", "proper_detector",
                                                         ends_with_legal_suffix, "COMPANY")
 
-      other_org_detector = skweak.heuristics.FunctionAnnotator("other_org_detector", other_org_detector_fun)
+      other_org_detector = FunctionAnnotator("other_org_detector", other_org_detector_fun)
 
       misc_detector = FunctionAnnotator("misc_detector", misc_generator)
+
+      
 
       return self
 
@@ -133,6 +149,10 @@ class NERAnnotator(CombinedAnnotator):
 
 
       # company_tries = extract_json_data(COMPANY_NAMES) 
+      gpe_tries = extract_json_data(GPE)
+      loc_tries = extract_json_data(LOC)
+      person_tries = extract_json_data(PERSON)
+
         
       wiki_small_tries = extract_json_data(WIKIDATA_SMALL)
 
@@ -141,7 +161,7 @@ class NERAnnotator(CombinedAnnotator):
       products_tries = extract_json_data(PRODUCTS)
 
       for name, tries in {"wiki_small":wiki_small_tries,
-                          "geo":geo_tries, "product":products_tries}.items():
+                          "geo":geo_tries, "product":products_tries, "gpe":gpe_tries, "loc":loc_tries, "person":person_tries}.items():
           
           # For each KB, we create two gazetters (case-sensitive or not)
           cased_gazetteer = GazetteerAnnotator("%s_cased"%name, tries, case_sensitive=True)
@@ -182,10 +202,16 @@ class NERAnnotator(CombinedAnnotator):
 
     def add_models(self):
 
-      self.add_annotator(ModelAnnotator("core_web_md", "en_core_web_md"))
-      self.add_annotator(TruecaseAnnotator("core_web_md_truecase", "en_core_web_md", FORM_FREQUENCIES))
+      self.add_annotator(ModelAnnotator("core_web_md", "en_core_web_trf"))
+      self.add_annotator(TruecaseAnnotator("core_web_md_truecase", "en_core_web_trf", FORM_FREQUENCIES))
+
+      # self.add_annotator(ModelAnnotator("wnut", "data/model-trf"))
+      # self.add_annotator( TruecaseAnnotator("wnut_truecase", "data/model-trf", FORM_FREQUENCIES))
+
       
       editor = lambda span: span[1:] if span[0].lemma_ in {"the", "a", "an"} else span
+      # self.add_annotator(SpanEditorAnnotator("edited_wnut", "wnut", editor))
+      # self.add_annotator(SpanEditorAnnotator("edited_wnut_truecase", "wnut_truecase", editor))
       self.add_annotator(SpanEditorAnnotator("edited_core_web_md", "core_web_md", editor))
       self.add_annotator(SpanEditorAnnotator("edited_core_web_md_truecase", "core_web_md_truecase", editor))
       
@@ -203,6 +229,40 @@ def company_detector_fun(doc):
   for chunk in doc.noun_chunks:
       if chunk[-1].lower_.rstrip(".") in {'corp', 'inc', 'ltd', 'llc', 'sa', 'ag'}:
           yield chunk.start, chunk.end, "CORP"
+
+def sent_converter(doc):
+  trainer = TransformersNER("tner/tner-xlm-roberta-large-uncased-wnut2017")
+  s = str(doc)
+  s = trainer.predict([s])
+  doc = s[0]['sentence']
+  yield doc
+
+def wnut_detector(doc):
+  trainer = TransformersNER("tner/tner-xlm-roberta-large-uncased-wnut2017")
+  s = str(doc)
+  s = trainer.predict([s])
+  z = s[0]['entity']
+  enti = {}
+  json = []
+  word = z[0]['mention']
+  li = word.split()
+  enti["entities"] = [((z[0]['position'][0], int(z[0]['position'][1]), z[0]['type']))]
+  z = z[1:]
+  for i in z:
+    enti["entities"].append((i['position'][0], i['position'][1], i['type']))
+  json.append([s[0]['sentence'], enti])
+  nlp = spacy.blank("en")
+  db = DocBin(attrs=["ENT_IOB", "ENT_TYPE"])
+  for text, annotations in json:
+      # print()
+      example = Example.from_dict(nlp.make_doc(text), annotations)
+      db.add(example.reference)
+  dbb = db.to_bytes()
+  nlp = spacy.blank("en")
+  doc_bin = DocBin().from_bytes(dbb)
+  new = list(doc_bin.get_docs(nlp.vocab))[0]
+  doc =new
+  yield doc
 
 def misc_generator(doc):
 

@@ -19,6 +19,9 @@ import data_utils
 # WIKIDATA = os.path.dirname(__file__) + "/../../data/wikidata_tokenised.json"
 WIKIDATA_SMALL = "data/wikidata_small_tokenised.json"
 # COMPANY_NAMES = "data/company_names_tokenised.json"
+GPE = "data/Gpe.json"
+LOC = "data/loc.json"
+PERSON = "data/Person_names.json"
 GEONAMES = "data/geonames.json"
 CRUNCHBASE = "data/crunchbase.json"
 PRODUCTS = "data/products.json"
@@ -134,8 +137,12 @@ class NERAnnotator(CombinedAnnotator):
 
       products_tries = extract_json_data(PRODUCTS)
 
+      gpe_tries = extract_json_data(GPE)
+      loc_tries = extract_json_data(LOC)
+      person_tries = extract_json_data(PERSON)
+
       for name, tries in {"wiki_small":wiki_small_tries,
-                          "geo":geo_tries, "product":products_tries}.items():
+                          "geo":geo_tries, "product":products_tries, "gpe":gpe_tries, "loc":loc_tries, "person":person_tries}.items():
           
           # For each KB, we create two gazetters (case-sensitive or not)
           cased_gazetteer = GazetteerAnnotator("%s_cased"%name, tries, case_sensitive=True)
