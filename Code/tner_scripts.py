@@ -2,6 +2,7 @@
 #FINE-TUNING
 
 #Checkpoint dir is for storing the fine-tuned model
+#The training file must be named as 'train.txt' and the test file as 'test.txt'
 from tner import TrainTransformersNER
 trainer = TrainTransformersNER(
         checkpoint_dir='data/checkpoint_0',
