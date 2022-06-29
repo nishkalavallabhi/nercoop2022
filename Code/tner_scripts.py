@@ -1,5 +1,7 @@
 
 #FINE-TUNING
+
+#Checkpoint dir is for storing the fine-tuned model
 from tner import TrainTransformersNER
 trainer = TrainTransformersNER(
         checkpoint_dir='data/checkpoint_0',
@@ -15,6 +17,7 @@ trainer.train()
 
 #EVALUATION 
 #Replace the path in transformers_model with a checkpoint path to load a fine-tuned model locally
+#Checkpoint_dir is a compulsory parameter to store the test result
 from tner import TrainTransformersNER
 trainer = TrainTransformersNER(checkpoint_dir='data/checkpoint_w', transformers_model="tner/tner-xlm-roberta-large-uncased-wnut2017", batch_size=16)
 trainer.test('data/mconer_train', batch_size_validation=1)
