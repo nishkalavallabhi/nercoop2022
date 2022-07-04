@@ -4,7 +4,7 @@ import re, json, os
 # import torch
 import skweak
 from skweak.base import CombinedAnnotator, SpanAnnotator
-from skweak.spacy import ModelAnnotator, TruecaseAnnotator
+from skweak.spacy import ModelAnnotator, TruecaseAnnotator, TransformerAnnotator
 from skweak.heuristics import FunctionAnnotator, TokenConstraintAnnotator, SpanConstraintAnnotator, SpanEditorAnnotator
 from skweak.gazetteers import GazetteerAnnotator, extract_json_data
 from skweak.doclevel import DocumentHistoryAnnotator, DocumentMajorityAnnotator
@@ -204,11 +204,11 @@ class NERAnnotator(CombinedAnnotator):
 
       self.add_annotator(ModelAnnotator("core_web_md", "en_core_web_trf"))
       self.add_annotator(TruecaseAnnotator("core_web_md_truecase", "en_core_web_trf", FORM_FREQUENCIES))
+      self.add_annotator(TransformerAnnotator("tner", "tner/xlm-roberta-large-uncased-wnut2017"))
 
       # self.add_annotator(ModelAnnotator("wnut", "data/model-trf"))
       # self.add_annotator( TruecaseAnnotator("wnut_truecase", "data/model-trf", FORM_FREQUENCIES))
 
-      
       editor = lambda span: span[1:] if span[0].lemma_ in {"the", "a", "an"} else span
       # self.add_annotator(SpanEditorAnnotator("edited_wnut", "wnut", editor))
       # self.add_annotator(SpanEditorAnnotator("edited_wnut_truecase", "wnut_truecase", editor))
@@ -235,7 +235,7 @@ def sent_converter(doc):
   s = str(doc)
   s = trainer.predict([s])
   doc = s[0]['sentence']
-  yield doc
+  doc
 
 def wnut_detector(doc):
   trainer = TransformersNER("tner/tner-xlm-roberta-large-uncased-wnut2017")
@@ -261,8 +261,7 @@ def wnut_detector(doc):
   nlp = spacy.blank("en")
   doc_bin = DocBin().from_bytes(dbb)
   new = list(doc_bin.get_docs(nlp.vocab))[0]
-  doc =new
-  yield doc
+  doc = new
 
 def misc_generator(doc):
 
