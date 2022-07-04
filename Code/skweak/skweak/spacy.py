@@ -4,7 +4,11 @@ from typing import Dict, Iterable, List, Tuple
 
 import spacy
 from spacy.tokens import Doc, Span  # type: ignore
-
+import spacy
+from spacy.training import Example
+from spacy.tokens import DocBin
+import torch
+from tner import TransformersNER
 from .base import SpanAnnotator
 
 ####################################################################
@@ -54,7 +58,6 @@ class ModelAnnotator(SpanAnnotator):
             # Add the annotation
             for ent in doc_copy.ents:
                 doc.spans[self.name].append(Span(doc, ent.start, ent.end, ent.label_))
-
             yield doc
 
     def create_new_doc(self, doc: Doc) -> Doc:
@@ -64,6 +67,97 @@ class ModelAnnotator(SpanAnnotator):
                                [tok.whitespace_ for tok in doc])
 
 
+class TransformerAnnotator(SpanAnnotator):
+    def __init__(self, name:str, model_path:str):
+        print("Loading TNER model...")
+        super(TransformerAnnotator, self).__init__(name)
+        self.trainer = TransformersNER(model_path)
+
+    def find_spans(self, doc: Doc) -> Iterable[Tuple[int, int, str]]:
+        """Annotates one single document using the Spacy NER model"""
+        print("Calling Prediction...")
+        s = str(doc)
+        s = self.trainer.predict([s])
+        z = s[0]['entity']
+        enti = {}
+        json = []
+        word = z[0]['mention']
+        li = word.split()
+        enti["entities"] = [((z[0]['position'][0], int(z[0]['position'][1]), z[0]['type']))]
+        z = z[1:]
+        for i in z:
+            enti["entities"].append((i['position'][0], i['position'][1], i['type']))
+        json.append([s[0]['sentence'], enti])   
+        nlp = spacy.blank("en")
+        db = DocBin(attrs=["ENT_IOB", "ENT_TYPE"])
+        for text, annotations in json:
+            example = Example.from_dict(nlp.make_doc(text), annotations)
+            db.add(example.reference)
+        dbb = db.to_bytes()
+        nlp = spacy.blank("en")
+        doc_bin = DocBin().from_bytes(dbb)
+        doc2 = list(doc_bin.get_docs(nlp.vocab))[0]
+        print("finished passing the model...")
+        print("Entities in ann:",doc2.ents)
+
+        # yield doc2
+        for ent in doc2.ents:
+            yield ent.start, ent.end, ent.label_
+
+    def pipe(self, docs: Iterable[Doc]) -> Iterable[Doc]:
+        """Annotates the stream of documents based on the Spacy model"""
+
+        # stream1, stream2 = itertools.tee(docs, 2)
+
+        # # Remove existing entities from the document
+        # stream2 = (self.create_new_doc(d) for d in stream2)
+        
+        # # And run the model
+        # for _, proc in self.model.pipeline:
+        #     stream2 = proc.pipe(stream2)
+        new_docs = []
+        docs1 = []
+        s1, s2 = itertools.tee(docs, 2)
+        for d in s1:
+            d = str(d)
+            # print(d)
+            docs1.append(self.trainer.predict([d]))
+        print("predictions done")
+        # s = str(doc)
+        # docs = self.trainer.predict(docs)
+        for doc in docs1:
+            # doc.spans[self.name] = []
+            # Add the annotation
+            z = doc[0]['entity']
+            enti = {}
+            json = []
+            word = z[0]['mention']
+            li = word.split()
+            enti["entities"] = [((z[0]['position'][0], int(z[0]['position'][1]), z[0]['type']))]
+            z = z[1:]
+            for i in z:
+                enti["entities"].append((i['position'][0], i['position'][1], i['type']))
+            json.append([doc[0]['sentence'], enti])
+            nlp = spacy.blank("en")
+            db = DocBin(attrs=["ENT_IOB", "ENT_TYPE"])
+            for text, annotations in json:
+              # print()
+              example = Example.from_dict(nlp.make_doc(text), annotations)
+              db.add(example.reference)
+            dbb = db.to_bytes()
+            nlp = spacy.blank("en")
+            doc_bin = DocBin().from_bytes(dbb)
+            doc2 = list(doc_bin.get_docs(nlp.vocab))[0]
+            new_docs.append(doc2)
+        print("Added Entities..")
+        for doc in new_docs:
+            yield doc
+        
+    def create_new_doc(self, doc: Doc) -> Doc:
+        """Create a new, empty Doc (but with the same tokenisation as before)"""
+
+        return spacy.tokens.Doc(self.model.vocab, [tok.text for tok in doc], #type: ignore
+                               [tok.whitespace_ for tok in doc])
 class TruecaseAnnotator(ModelAnnotator):
     """Spacy model annotator that preprocess all texts to convert them to a 
     "truecased" representation (see below)"""
