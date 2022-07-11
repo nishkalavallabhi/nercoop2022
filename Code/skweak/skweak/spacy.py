@@ -1,7 +1,7 @@
 import itertools
 import json
 from typing import Dict, Iterable, List, Tuple
-
+import os
 import spacy
 from spacy.tokens import Doc, Span  # type: ignore
 import spacy
@@ -15,7 +15,44 @@ from .base import SpanAnnotator
 # Labelling source based on neural models
 ####################################################################
 
+class Standardiser(SpanAnnotator):
 
+  def __init__(self):
+      super(Standardiser, self).__init__("")
+
+  def __call__(self, doc):
+      """Annotates one single document"""     
+            
+      for source in doc.spans:
+            
+          new_spans = []  
+          for span in doc.spans[source]:
+              if "\n" in span.text:
+                  continue
+              elif span.label_ in {"person", "PERSON", "PER", "per"}:
+                  new_spans.append(Span(doc, span.start, span.end, label="PER"))
+
+              elif span.label_ in {"group", "GROUP", "GRP", "grp", "NORP", "norp", "ORG", "org"}:
+                  new_spans.append(Span(doc, span.start, span.end, label="GRP"))
+
+              elif span.label_ in {"corporation", "CORPORATION", "CORP", "FAC", "fac"}:
+                  new_spans.append(Span(doc, span.start, span.end, label="CORP"))
+
+              elif span.label_ in {"location", "GPE", "LOCATION", "gpe", "loc"}:
+                  new_spans.append(Span(doc, span.start, span.end, label="LOC"))
+
+              # elif span.label_ in {"EVENT", "FAC", "LANGUAGE", "LAW", "NORP", "WORK_OF_ART", "creative-work"}:
+              #     new_spans.append(Span(doc, span.start, span.end, label="MISC"))
+
+              elif span.label_ in {"product", "PRODUCT", "PROD"}:
+                  new_spans.append(Span(doc, span.start, span.end, label="PROD"))
+
+              elif span.label_ in {"WORK_OF_ART", "creative-work", "work of art", "work-of-art", "work_of_art"}:
+                  new_spans.append(Span(doc, span.start, span.end, label="CW"))
+              else:
+                  new_spans.append(span)         
+          doc.spans[source] = new_spans      
+      return doc
 class ModelAnnotator(SpanAnnotator):
     """Annotation based on a spacy NER model"""
 
@@ -41,7 +78,7 @@ class ModelAnnotator(SpanAnnotator):
 
     def pipe(self, docs: Iterable[Doc]) -> Iterable[Doc]:
         """Annotates the stream of documents based on the Spacy model"""
-
+        print("calling pipe method..")
         stream1, stream2 = itertools.tee(docs, 2)
 
         # Remove existing entities from the document
@@ -58,6 +95,8 @@ class ModelAnnotator(SpanAnnotator):
             # Add the annotation
             for ent in doc_copy.ents:
                 doc.spans[self.name].append(Span(doc, ent.start, ent.end, ent.label_))
+            # print("Entities:",doc.ents)
+            # print(self.name)
             yield doc
 
     def create_new_doc(self, doc: Doc) -> Doc:
@@ -71,7 +110,13 @@ class TransformerAnnotator(SpanAnnotator):
     def __init__(self, name:str, model_path:str):
         print("Loading TNER model...")
         super(TransformerAnnotator, self).__init__(name)
-        self.trainer = TransformersNER(model_path)
+        # path_parent = os.path.dirname(os.getcwd())
+        # os.chdir(path_parent)
+        if "data" in model_path:
+            self.trainer = TransformersNER("./"+model_path)
+        else:
+            self.trainer = TransformersNER(model_path)
+        print("Loaded TNER ")
 
     def find_spans(self, doc: Doc) -> Iterable[Tuple[int, int, str]]:
         """Annotates one single document using the Spacy NER model"""
@@ -106,7 +151,7 @@ class TransformerAnnotator(SpanAnnotator):
 
     def pipe(self, docs: Iterable[Doc]) -> Iterable[Doc]:
         """Annotates the stream of documents based on the Spacy model"""
-
+        print("calling pipe..")
         # stream1, stream2 = itertools.tee(docs, 2)
 
         # # Remove existing entities from the document
@@ -118,16 +163,25 @@ class TransformerAnnotator(SpanAnnotator):
         new_docs = []
         docs1 = []
         s1, s2 = itertools.tee(docs, 2)
+        # s1 = (self.create_new_doc(d) for d in s1)
+        # for d in docs:
+        #     print("INside loop")
+        #     s = self.find_spans(d)
+        #     yield s
+        print("calling predictions")
         for d in s1:
             d = str(d)
             # print(d)
             docs1.append(self.trainer.predict([d]))
+            # print(self.trainer.predict([d]))
+
         print("predictions done")
         # s = str(doc)
         # docs = self.trainer.predict(docs)
         for doc in docs1:
             # doc.spans[self.name] = []
             # Add the annotation
+            # print("prediction:",doc)
             z = doc[0]['entity']
             enti = {}
             json = []
@@ -149,9 +203,37 @@ class TransformerAnnotator(SpanAnnotator):
             doc_bin = DocBin().from_bytes(dbb)
             doc2 = list(doc_bin.get_docs(nlp.vocab))[0]
             new_docs.append(doc2)
+        # print(new_docs[0].ents)
+        # s2 = new_docs
+        s2, s3 = itertools.tee(new_docs, 2)
+        # for s in s2:
+        #     s.ents = ""
+        # print(new_docs[0].ents)
         print("Added Entities..")
-        for doc in new_docs:
+        c = 0
+        # for d in new_docs:
+        #     print(d.ents)
+        for doc, doc_copy in zip(s2, new_docs):
+
+            doc.spans[self.name] = []
+            # Add the annotation
+            # print("Doc:",doc)
+            # print("Doc_Copy:", doc_copy)
+            # print("Doc number:",c)
+            c = c + 1
+            # print("copy ents:",doc_copy.ents)
+            for ent in doc_copy.ents:
+                # print(ent.start)
+                # print(ent.label_)
+                # print("doc:",doc)
+                # print("doc_copy:",doc_copy)
+               
+                print(Span(doc, ent.start, ent.end, ent.label_))
+                doc.spans[self.name].append(Span(doc, ent.start, ent.end, ent.label_))
+            print("Entities:",doc.ents)
+            print("NAME:",self.name)
             yield doc
+        
         
     def create_new_doc(self, doc: Doc) -> Doc:
         """Create a new, empty Doc (but with the same tokenisation as before)"""
