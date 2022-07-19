@@ -11,13 +11,15 @@ What are some simple, existing methods to generate adversarial test sets for NER
     - RockNER (using entity linking to choose the appropriate entities) Lin et.al., https://aclanthology.org/2021.emnlp-main.302.pdf
 
 - Changing the context a little bit
-   - using a masked language model
+   - using a masked language model (in RockNER paper)
    
 What we can add, while doing most of these:
 - Random sampling and replacement within the train/dev/test sets (as a strong baseline)
 - Using sentences from other NER datasets, with similar entity type distribution within the sentence
 - Using entity linking
 - Using simple masking approaches and data augmentation methods (e.g., nlpaug)
+
+TODO: Think of other ways of generating paraphrases or some such thing to change contexts 
 
 
 Test datasets: 
