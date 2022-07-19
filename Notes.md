@@ -21,7 +21,6 @@ What we can add, while doing most of these:
 
 TODO: Think of other ways of generating paraphrases or some such thing to change contexts 
 
-
 Test datasets: 
 English: conll-03, wnut, multiconer, ontonotes (first 3 are open/free)
 German: conll-03, multiconer
@@ -30,3 +29,8 @@ If everything is setup and running smoothly, we can look into one or two other l
 
 Other relevant papers:
 Robustness Gym https://aclanthology.org/2021.naacl-demos.6.pdf
+
+Paper structure:
+- describing the implemented methods to generate adversarial input
+- testing with multiple datasets
+- probably pick a dataset or two and do more analysis on the performance (e.g., using nervaluate or looking more in detail into individual categories)
