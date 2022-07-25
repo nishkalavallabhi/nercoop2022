@@ -17,9 +17,8 @@ What we can add, while doing most of these:
 - Random sampling and replacement within the train/dev/test sets (as a strong baseline). 
 - Using sentences from other NER datasets, with similar entity type distribution within the sentence  
 - Using entity linking. 
-- Using simple masking approaches and data augmentation methods (e.g., nlpaug). 
-
-TODO: Think of other ways of generating paraphrases or some such thing to change contexts   
+- Using simple masking approaches and data augmentation methods (e.g., nlpaug).   
+- Paraphrasing with quillbot (manually)
 
 Test datasets:   
 English: conll-03, wnut, multiconer, ontonotes (first 3 are open/free). 
