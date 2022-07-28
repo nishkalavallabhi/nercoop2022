@@ -3,7 +3,8 @@ import random
 
 # path = "mconer_test.spacy"
 # path = "wnut17test.spacy"
-path = "ontonotes_test.spacy"
+# path = "ontonotes_test.spacy"
+path = "conll_deu_test.spacy"
 # path = "conll03_test.spacy"
 
 samples= list(skweak.utils.docbin_reader(path))
@@ -402,12 +403,12 @@ for e in samples:
 	# print(s)
 	# print(t)
 	# print(len(t))
-	# print(len(s))
-	if len(t) != len(s):
-		# wor.append(s)
-		# ta.append(t) 
-		print("ERROR")
-		break
+	# # print(len(s))
+	# if len(t) != len(s):
+	# 	# wor.append(s)
+	# 	# ta.append(t) 
+	# 	print("ERROR")
+	# 	break
 	wor.append(s)
 	ta.append(t)
 
@@ -417,7 +418,8 @@ for e in samples:
 print(len(wor))
 print(len(ta))
 # print(ta[0])
-fw = open("perturb_ontonotes_test_v1.txt", "w", encoding="utf-8")
+fw = open("perturb_conll_deu_test_v1.txt", "w", encoding="utf-8")
+# fw = open("perturb_ontonotes_test_v1.txt", "w", encoding="utf-8")
 # fw = open("perturb_wnut17_test_v1.conll", "w", encoding="utf-8")
 # fw = open("perturb_conll03_test.conll", "w", encoding="utf-8")
 for i in range(len(wor)):
