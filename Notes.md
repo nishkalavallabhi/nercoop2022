@@ -24,6 +24,8 @@ Test datasets:
 English: conll-03, wnut, multiconer, ontonotes (first 3 are open/free). 
 German: conll-03, multiconer. 
 
+NER methods to compare original and modified test sets: generic BERT fine tuning approach, dataset specific pre-existing models (e.g., Spacy for OntoNotes etc)
+
 If everything is setup and running smoothly, we can look into one or two other languages later on (say Hindi - multiconer)
 
 Other relevant papers: Robustness Gym https://aclanthology.org/2021.naacl-demos.6.pdf. 
