@@ -31,18 +31,6 @@ def get_conll_data(filepath, sep="\t"):
     return sentences, tags
 
 """
-Tags the paraphrased text obtained from quillbot. 
-"""
-def tag_paraphrase(tokens, labels, new_tokens):
-    mentions = get_mentions_from_sent(tokens, labels)  # returns list of (mention,etype) tuples)
-    new_labels = ["O"] * len(new_tokens)  # start with all "O"s and replace only those needed.
-    for (mention, label) in mentions:
-        new_labels[new_tokens.index(mention[0])] = "B-" + label
-        for token in mention[1:]:
-            new_labels[new_tokens.index(token)] = "I-" + label
-    return new_labels
-
-"""
 Get mentions from a list of tokens and a corresponding list of
 BIO-2 labels.
 """
@@ -164,7 +152,14 @@ def collect_paraphrases(final_sentences, final_tags):
         my_pp_tokens = tmp.split()
         print(my_pp_tokens)
         my_old_tags = final_tags[i].split()
-        my_pp_labels = tag_paraphrase(my_old_tokens, my_old_tags, my_pp_tokens)
+        try:
+            my_pp_labels = tag_paraphrase(my_old_tokens, my_old_tags, my_pp_tokens)
+        except:
+            tmp2 = input("Something isn't right. Check the tokenization and entities "
+                        "in the paraphrased text manually and enter the text again:  \n")
+            my_pp_tokens_new = tmp2.split()
+            print(my_pp_tokens_new)
+            my_pp_labels = tag_paraphrase(my_old_tokens, my_old_tags, my_pp_tokens_new)
         print(my_pp_labels)
         pp_tokens.append(my_pp_tokens)
         pp_tags.append(my_pp_labels)
@@ -184,17 +179,21 @@ def write_paraphrased_dataset(fp, pp_tokens, pp_tags):
 def main():
     #change these five lines each time appropriately
     fpin = "/Users/Vajjalas/Downloads/NERProjects-Ongoing/conll-03-en/test.txt"
-    fpo = "../../tmp/pptest.conll"
     sep = " "
-    netype = "PER"
-    sample_size = 10
+    netypes = ["PER", "LOC", "ORG"]
+    sample_size = 100
 
     #sampling a bunch of sentences to paraphrase on quillbot or other such venues
     tokens,labels = get_conll_data(fpin, sep)
-    final_sentences, final_tags = select_from_subset(tokens, labels, netype, sample_size)
-    pp_tokens, pp_tags = collect_paraphrases(final_sentences, final_tags)
-    print("Collected paraphrases, writing to disk")
-    write_paraphrased_dataset(fpo, pp_tokens, pp_tags)
+
+    for netype in netypes:
+        fpo = "../../tmp/conll03" + "netype" + "-pp.conll"
+        final_sentences, final_tags = select_from_subset(tokens, labels, netype, sample_size)
+        pp_tokens, pp_tags = collect_paraphrases(final_sentences, final_tags)
+        print("Collected paraphrases, writing to disk")
+        write_paraphrased_dataset(fpo, pp_tokens, pp_tags)
+        print("Wrote PP dataset for ", netype)
+
     print("DONE")
 
 if __name__ == "__main__":
