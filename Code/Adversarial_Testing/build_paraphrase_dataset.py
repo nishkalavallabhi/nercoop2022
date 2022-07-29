@@ -5,6 +5,8 @@ Get a sample of sentences to select paraphrase candidates from a given conll fil
 import collections
 import pprint
 import random
+from quillbot import *
+import time
 
 def get_conll_data(filepath, sep="\t"):
     """Load CoNLL-2003 (English) data split.
@@ -132,7 +134,7 @@ def tag_paraphrase(tokens, labels, new_tokens):
     return new_labels
 
 """
-Use quillbot to get final paraphrased sentences - interactive
+Not using now: Use quillbot to get final paraphrased sentences - interactive
 Inputs: Two lists of space separated strings for tokens, tags 
 Output: pp_tokens (list of list of tokens), pp_tags (list of list of tags)
 """
@@ -165,6 +167,28 @@ def collect_paraphrases(final_sentences, final_tags):
         pp_tags.append(my_pp_labels)
     return pp_tokens, pp_tags
 
+"""
+Calls functions from quillbot.py to simulate a browser based call to quillbot.
+"""
+def collect_pp_selenium(final_sentences, final_tags):
+    pp_tokens = []  # list of list of tokens
+    pp_tags = []  # list of list of tags
+    size = len(final_sentences)
+    for i in range(0, size):
+        time.sleep(10)
+        my_pp_tokens = format_sentence(get_paraphrase(final_sentences[i]))
+        my_old_tokens = final_sentences[i].split()
+        my_old_tags = final_tags[i].split()
+        try:
+            my_pp_labels = tag_paraphrase(my_old_tokens, my_old_tags, my_pp_tokens)
+            pp_tokens.append(my_pp_tokens)
+            pp_tags.append(my_pp_labels)
+        except:
+            print("Skipping: ", final_sentences[i])
+            continue
+    return pp_tokens, pp_tags
+
+
 def write_paraphrased_dataset(fp, pp_tokens, pp_tags):
     fw = open(fp, "w", encoding="utf-8")
     assert(len(pp_tokens) == len(pp_tags))
@@ -178,21 +202,24 @@ def write_paraphrased_dataset(fp, pp_tokens, pp_tags):
 
 def main():
     #change these five lines each time appropriately
+    #TODO: Make them args later.
     fpin = "/Users/Vajjalas/Downloads/NERProjects-Ongoing/conll-03-en/test.txt"
+    fpout = "../../tmp/conll03" + "netype" + "-pp.conll"
     sep = " "
-    netypes = ["PER", "LOC", "ORG"]
+    netype = "PER" #["PER", "LOC", "ORG"]
     sample_size = 100
 
     #sampling a bunch of sentences to paraphrase on quillbot or other such venues
     tokens,labels = get_conll_data(fpin, sep)
-
-    for netype in netypes:
-        fpo = "../../tmp/conll03" + "netype" + "-pp.conll"
-        final_sentences, final_tags = select_from_subset(tokens, labels, netype, sample_size)
-        pp_tokens, pp_tags = collect_paraphrases(final_sentences, final_tags)
-        print("Collected paraphrases, writing to disk")
-        write_paraphrased_dataset(fpo, pp_tokens, pp_tags)
-        print("Wrote PP dataset for ", netype)
+    print("Choosing sentences for the NE type: ", netype)
+    print("******\n")
+    #final_sentences, final_tags = select_from_subset(tokens, labels, netype, sample_size)
+    final_sentences, final_tags = get_subset(tokens, labels, netype, sample_size)
+    #Use the above line instead of select_from_subset, if you just want to send everything to quillbot.
+    pp_tokens, pp_tags = collect_pp_selenium(final_sentences, final_tags)
+    print("Collected paraphrases, writing to disk")
+    write_paraphrased_dataset(fpout, pp_tokens, pp_tags)
+    print("Wrote PP dataset for ", netype)
 
     print("DONE")
 
