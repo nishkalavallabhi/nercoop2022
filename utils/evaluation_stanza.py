@@ -1,12 +1,11 @@
 #Evaluating performance with Spacy/Stanza (outside command line tools)
-import spacy, stanza, spacy_stanza
-from spacy.tokenizer import Tokenizer
+import spacy_stanza
 from seqeval.metrics import classification_report
 from seqeval.metrics import f1_score
 import sys
 import itertools
 
-def read_file(filepath):
+def read_file(filepath, sep):
     fh = open(filepath)
     sentences = []
     netags = []
@@ -20,18 +19,18 @@ def read_file(filepath):
               tempsen = []
               tempnet = []
        else:
-          splits = line.strip().split("\t")
+          splits = line.strip().split(sep)
           tempsen.append(splits[0])
           tempnet.append(splits[-1])
     fh.close()
     print("Num sentences in: ", filepath, ":", len(sentences))
     return sentences, netags
 
-def eval_stanza(mypath):
+def eval_stanza(mypath, sep):
     snlp = spacy_stanza.load_pipeline(name="en", processors={'ner': 'conll03'}, tokenize_pretokenized=True)
     print("Models loaded, and they assume whitespace tokenized text")
     stanza_netags = []
-    gold_sen, gold_ner = read_file(mypath)
+    gold_sen, gold_ner = read_file(mypath, sep)
     for sen in gold_sen:
         actual_sen = " ".join(sen)
         doc_stanza = snlp(actual_sen)
@@ -47,10 +46,12 @@ def eval_stanza(mypath):
     print("Classification report for Stanza NER: ")
     print(classification_report(gold_ner, stanza_netags, digits=4))
 
-print("Stanza model's performance on standard test set")
-mypath1 = "/Users/Vajjalas/Downloads/NERProjects-Ongoing/conll-03-en/test.txt"
-eval_stanza(mypath1)
-
 print("Stanza model's performance on paraphrased dataset")
 mypath2 = "../tmp/conll03netype-pp.conll"
-eval_stanza(mypath2)
+eval_stanza(mypath2, sep="\t")
+
+print("Stanza model's performance on standard test set")
+mypath1 = "/Users/Vajjalas/Downloads/NERProjects-Ongoing/conll-03-en/test.txt"
+eval_stanza(mypath1, sep=" ")
+
+

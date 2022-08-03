@@ -4,11 +4,13 @@ import pandas as pd
 import time
 import pyperclip
 
-def get_paraphrase(sentence):
+def get_paraphrase(sentence, driver):
 	link = "https://quillbot.com/"
-	driver = webdriver.Chrome('/Users/vajjalas/Downloads/chromedriver')
-	driver.get(link)
+	# driver = webdriver.Chrome('/Users/vajjalas/Downloads/chromedriver')
+	if "QuillBot AI" not in driver.title:
+		driver.get(link)
 	input_text = driver.find_element("id","inputText")
+	input_text.clear()
 	input_text.send_keys(sentence)
 	# input_text.submit()
 	button = driver.find_element("xpath","//*[@id='InputBottomQuillControl']/div/div/div/div[2]/div/div/div/div/button")
@@ -22,7 +24,7 @@ def get_paraphrase(sentence):
 	data = pyperclip.paste()
 	print(data)
 	return str(data)
-	driver.close()
+	# driver.close()
 
 def format_sentence(sentence):
 	new_mod = []

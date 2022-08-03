@@ -1,7 +1,7 @@
 """
 Get a sample of sentences to select paraphrase candidates from a given conll file.
 """
-
+from selenium import webdriver
 import collections
 import pprint
 import random
@@ -174,9 +174,11 @@ def collect_pp_selenium(final_sentences, final_tags):
     pp_tokens = []  # list of list of tokens
     pp_tags = []  # list of list of tags
     size = len(final_sentences)
+
+    driver = webdriver.Chrome('/Users/vajjalas/Downloads/chromedriver')
     for i in range(0, size):
         time.sleep(10)
-        my_pp_tokens = format_sentence(get_paraphrase(final_sentences[i]))
+        my_pp_tokens = format_sentence(get_paraphrase(final_sentences[i], driver))
         my_old_tokens = final_sentences[i].split()
         my_old_tags = final_tags[i].split()
         try:
@@ -186,6 +188,7 @@ def collect_pp_selenium(final_sentences, final_tags):
         except:
             print("Skipping: ", final_sentences[i])
             continue
+    driver.close()
     return pp_tokens, pp_tags
 
 
