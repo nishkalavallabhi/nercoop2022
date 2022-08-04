@@ -19,7 +19,7 @@ def get_paraphrase(sentence, driver):
 
 	copy_button = driver.find_element("xpath", "//*[@id='outputBottomQuillControls-default']/div/div/div/div/div[2]/div/div[3]/button")
 	copy_button.click()
-
+	# data = ""
 	pyperclip.waitForPaste()
 	data = pyperclip.paste()
 	print(data)
@@ -32,6 +32,9 @@ def format_sentence(sentence):
 	temp_w = mod_sen.copy()
 	for i in mod_sen:
 		l=[]
+
+		#i = i.lower() #Uncomment this line for Multiconer test set
+		
 		if "'" in i and i.count('.') == 1:
 		  l = i.split("'")
 		  l.insert(1, "'")
@@ -43,6 +46,61 @@ def format_sentence(sentence):
 		    # print("mod:",temp_w)
 		  if len(d) != 0:
 		    del temp_w[temp_w.index(d[0])]
+
+		elif i.count('.') == 1:
+		  l = i.split(".")
+		  l.append(".")
+		  if "" in l:
+		    l.remove("")
+		  d = []
+		  for z in l:
+		    d.append(i)
+		    temp_w.insert(temp_w.index(i), z)
+		    # print("mod:",temp_w)
+		  if len(d) != 0:
+		    del temp_w[temp_w.index(d[0])]
+		# new_mod.append(temp_w)
+
+		elif i.count('?') == 1:
+		  l = i.split("?")
+		  l.append("?")
+		  if "" in l:
+		    l.remove("")
+		  d = []
+		  for z in l:
+		    d.append(i)
+		    temp_w.insert(temp_w.index(i), z)
+		    # print("mod:",temp_w)
+		  if len(d) != 0:
+		    del temp_w[temp_w.index(d[0])]
+		# new_mod.append(temp_w)
+
+		elif ")" in i:
+		  l = i.split(")")
+		  l.append(")")
+		  if "" in l:
+		    l.remove("")
+		  d = []
+		  for z in l:
+		    d.append(i)
+		    temp_w.insert(temp_w.index(i), z)
+		    # print("mod:",temp_w)
+		  if len(d) != 0:
+		    del temp_w[temp_w.index(d[0])]
+
+		elif "(" in i:
+		  l = i.split("(")
+		  l.append("(")
+		  if "" in l:
+		    l.remove("")
+		  d = []
+		  for z in l:
+		    d.append(i)
+		    temp_w.insert(temp_w.index(i), z)
+		    # print("mod:",temp_w)
+		  if len(d) != 0:
+		    del temp_w[temp_w.index(d[0])]
+
 
 		elif "'" in i:
 		  l = i.split("'")
