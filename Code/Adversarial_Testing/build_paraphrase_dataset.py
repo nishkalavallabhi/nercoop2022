@@ -209,11 +209,11 @@ def write_dataset(fp, pp_tokens, pp_tags):
 def main():
     #change these five lines each time appropriately
     #TODO: Make them args later.
-    fpin = "/Users/Vajjalas/Downloads/NERProjects-Ongoing/conll-03-en/test.txt"
-    netypes =["PER", "LOC", "ORG", "MISC"] #CONLL-03
-    fpout = "../../tmp/" + "conll03" + "-forpp.conll"
+    fpin = "/Users/Vajjalas/Downloads/NERProjects-Ongoing/Summer2022CoOp/multiconer2022/EN-English/en_test.conll"
+    netypes =["PROD", "LOC", "GRP", "PER", "CORP", "CW"] #CONLL-03
+    fpout = "../../tmp/" + "multiconer" + "-forpp.conll"
     sep = " "
-    sample_size = 500
+    sample_size = 600
 
     #sampling a bunch of sentences to paraphrase on quillbot or other such venues
     tokens,labels = get_conll_data(fpin, sep)

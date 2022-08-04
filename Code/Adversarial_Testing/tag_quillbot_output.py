@@ -70,9 +70,9 @@ def format_sentence(sentence):
 
 def main():
     #CHANGE THESE THREE SENTENCES
-    path1 = "../../tmp/conll03-forpp.conll"
-    path2 = "../../tmp/conll03-pp.conll"
-    path3 = "generated_datasets/paraphrases/conll03-test-pp.conll"
+    path1 = "../../tmp/multiconer-forpp.conll"
+    path2 = "../../tmp/multiconer-pp.conll"
+    path3 = "generated_datasets/paraphrases/multiconer-test-pp.conll"
 
     #Read the original sentences, tags set:
     orig_sentences = [] #list of list of tokens
@@ -95,7 +95,7 @@ def main():
     paraphrases = [] #list of list of tokens
     for line in open(path2):
         if len(line) > 1:
-            paraphrases.append(format_sentence(line.strip()))
+            paraphrases.append(format_sentence(line.strip().lower())) #DO THIS ONLY FOR WNUT, Multiconer!
 
     assert(len(orig_sentences) == len(orig_tags))
     assert(len(paraphrases) == len(orig_sentences))
