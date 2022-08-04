@@ -19,17 +19,19 @@ def get_conll_data(filepath, sep="\t"):
     tempsen = []
     tempnet = []
     for line in fh:
-        if len(line)>1 and not line.startswith("# id"):
+        if len(line) > 1 and sep in line and not line.startswith("# id") and not line.startswith("-DOCSTART"):
             splits = line.strip().split(sep)
             if len(splits) > 1:
                 tempsen.append(splits[0].strip())
                 tempnet.append(splits[-1].strip())
         else:
+            if tempsen and tempnet:
                 sentences.append(tempsen)
                 tags.append(tempnet)
                 tempsen = []
                 tempnet = []
     fh.close()
+    print("Num sentences in this dataset: ", len(sentences))
     return sentences, tags
 
 """
@@ -82,10 +84,11 @@ netype: targeted entity type
 sample_size: size of the sample initially extracted. 
 Returns: Two lists of space separated strings for tokens, tags 
 """
-def get_subset(tokens, labels, netype, sample_size):
+def get_subset(tokens, labels, netypes, sample_size):
     data_size = len(tokens)
     sub_sents = []
     sub_sents_tags = []
+    netype = random.sample(netypes,1)[0]
     for i in range(0, data_size):
         if "B-"+netype in labels[i]:
             sub_sents.append(" ".join(tokens[i]))
@@ -191,15 +194,15 @@ def collect_pp_selenium(final_sentences, final_tags):
     driver.close()
     return pp_tokens, pp_tags
 
-
-def write_paraphrased_dataset(fp, pp_tokens, pp_tags):
+#tokens, tags: space separated strings
+def write_dataset(fp, pp_tokens, pp_tags):
     fw = open(fp, "w", encoding="utf-8")
     assert(len(pp_tokens) == len(pp_tags))
     for i in range(len(pp_tokens)):
-        for j in range(0, len(pp_tokens[i])):
-            fw.write(pp_tokens[i][j] + "\t" + pp_tags[i][j])
-            fw.write("\n")
+        fw.write(pp_tokens[i])
         fw.write("\n")
+        fw.write(pp_tags[i])
+        fw.write("\n\n")
     fw.close()
     print("File written to: ", fp)
 
@@ -207,22 +210,30 @@ def main():
     #change these five lines each time appropriately
     #TODO: Make them args later.
     fpin = "/Users/Vajjalas/Downloads/NERProjects-Ongoing/conll-03-en/test.txt"
-    fpout = "../../tmp/conll03" + "netype" + "-pp.conll"
+    netypes =["PER", "LOC", "ORG", "MISC"] #CONLL-03
+    fpout = "../../tmp/" + "conll03" + "-forpp.conll"
     sep = " "
-    netype = "PER" #["PER", "LOC", "ORG"]
-    sample_size = 100
+    sample_size = 500
 
     #sampling a bunch of sentences to paraphrase on quillbot or other such venues
     tokens,labels = get_conll_data(fpin, sep)
-    print("Choosing sentences for the NE type: ", netype)
-    print("******\n")
+    #print("Choosing sentences for the NE type: ", netype)
+    #print("******\n")
     #final_sentences, final_tags = select_from_subset(tokens, labels, netype, sample_size)
-    final_sentences, final_tags = get_subset(tokens, labels, netype, sample_size)
+    final_sentences, final_tags = get_subset(tokens, labels, netypes, sample_size)
+    write_dataset(fpout, final_sentences, final_tags)
+    print("Number of sentences in the selected sample: ", len(final_sentences))
+    for sen in final_sentences:
+        print(sen)
+        print()
+
     #Use the above line instead of select_from_subset, if you just want to send everything to quillbot.
+    """
     pp_tokens, pp_tags = collect_pp_selenium(final_sentences, final_tags)
     print("Collected paraphrases, writing to disk")
     write_paraphrased_dataset(fpout, pp_tokens, pp_tags)
     print("Wrote PP dataset for ", netype)
+    """
 
     print("DONE")
 
