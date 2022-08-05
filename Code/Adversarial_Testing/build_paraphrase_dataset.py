@@ -90,7 +90,8 @@ def get_subset(tokens, labels, netypes, sample_size):
     sub_sents_tags = []
     netype = random.sample(netypes,1)[0]
     for i in range(0, data_size):
-        if "B-"+netype in labels[i]:
+        #if "B-"+netype in labels[i]:
+        if "B-" in " ".join(labels[i]):
             sub_sents.append(" ".join(tokens[i]))
             sub_sents_tags.append(" ".join(labels[i]))
     print("Total number of sentences; ", data_size)
@@ -209,10 +210,10 @@ def write_dataset(fp, pp_tokens, pp_tags):
 def main():
     #change these five lines each time appropriately
     #TODO: Make them args later.
-    fpin = "/Users/Vajjalas/Downloads/NERProjects-Ongoing/Summer2022CoOp/multiconer2022/EN-English/en_test.conll"
-    netypes =["PROD", "LOC", "GRP", "PER", "CORP", "CW"] #CONLL-03
-    fpout = "../../tmp/" + "multiconer" + "-forpp.conll"
-    sep = " "
+    fpin = "/Users/Vajjalas/Downloads/NERProjects-Ongoing/Summer2022CoOp/wnut17/wnut17test.conll"
+    netypes =["PROD", "LOC", "GRP", "PER", "CORP", "CW"] #multiconer
+    fpout = "../../tmp/" + "wnut" + "-forpp.conll"
+    sep = "\t" #space for multiconer
     sample_size = 600
 
     #sampling a bunch of sentences to paraphrase on quillbot or other such venues

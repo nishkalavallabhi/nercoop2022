@@ -47,7 +47,7 @@ def eval_stanza(mypath, sep):
     print(classification_report(gold_ner, stanza_netags, digits=4))
 
 print("Stanza model's performance on paraphrased dataset")
-mypath2 = "../tmp/conll03netype-pp.conll"
+mypath2 = "../code/Adversarial_Testing/generated_datasets/paraphrases/conll03-test-pp.conll"
 eval_stanza(mypath2, sep="\t")
 
 print("Stanza model's performance on standard test set")
