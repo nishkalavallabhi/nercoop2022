@@ -11,68 +11,125 @@ def write_paraphrased_dataset(fpout, pp_sens, pp_labels):
 
 
 def format_sentence(sentence):
-	new_mod = []
-	mod_sen = sentence.split()
-	temp_w = mod_sen.copy()
-	for i in mod_sen:
-		l=[]
-		if "'" in i and i.count('.') == 1:
-		  l = i.split("'")
-		  l.insert(1, "'")
-		  l.append('.')
-		  d = []
-		  for z in l:
-		    d.append(i)
-		    temp_w.insert(temp_w.index(i), z)
-		    # print("mod:",temp_w)
-		  if len(d) != 0:
-		    del temp_w[temp_w.index(d[0])]
+    new_mod = []
+    mod_sen = sentence.split()
+    temp_w = mod_sen.copy()
+    for i in mod_sen:
+        l = []
 
-		elif "'" in i:
-		  l = i.split("'")
-		  l.insert(1, "'")
-		  d = []
-		  for z in l:
-		    d.append(i)
-		    temp_w.insert(temp_w.index(i), z)
-		    # print("mod:",temp_w)
-		  if len(d) != 0:
-		    del temp_w[temp_w.index(d[0])]
+        # i = i.lower() #Uncomment this line for Multiconer test set
 
-		elif "," in i:
-		  l = i.split(",")
-		  l.append(",")
-		  if "" in l:
-		    l.remove("")
-		  d = []
-		  for z in l:
-		    d.append(i)
-		    temp_w.insert(temp_w.index(i), z)
-		    # print("mod:",temp_w)
-		  if len(d) != 0:
-		    del temp_w[temp_w.index(d[0])]
+        if "'" in i and i.count('.') == 1:
+            l = i.split("'")
+            l.insert(1, "'")
+            l.append('.')
+            d = []
+            for z in l:
+                d.append(i)
+                temp_w.insert(temp_w.index(i), z)
+                # print("mod:",temp_w)
+            if len(d) != 0:
+                del temp_w[temp_w.index(d[0])]
 
-		elif i.count('.') == 1:
-		  l = i.split(".")
-		  l.append(".")
-		  if "" in l:
-		    l.remove("")
-		  d = []
-		  for z in l:
-		    d.append(i)
-		    temp_w.insert(temp_w.index(i), z)
-		    # print("mod:",temp_w)
-		  if len(d) != 0:
-		    del temp_w[temp_w.index(d[0])]
-		# new_mod.append(temp_w)
-	return temp_w
+        elif i.count('.') == 1:
+            l = i.split(".")
+            l.append(".")
+            if "" in l:
+                l.remove("")
+            d = []
+            for z in l:
+                d.append(i)
+                temp_w.insert(temp_w.index(i), z)
+                # print("mod:",temp_w)
+            if len(d) != 0:
+                del temp_w[temp_w.index(d[0])]
+        # new_mod.append(temp_w)
 
+        elif i.count('?') == 1:
+            l = i.split("?")
+            l.append("?")
+            if "" in l:
+                l.remove("")
+            d = []
+            for z in l:
+                d.append(i)
+                temp_w.insert(temp_w.index(i), z)
+                # print("mod:",temp_w)
+            if len(d) != 0:
+                del temp_w[temp_w.index(d[0])]
+        # new_mod.append(temp_w)
+
+        elif ")" in i:
+            l = i.split(")")
+            l.append(")")
+            if "" in l:
+                l.remove("")
+            d = []
+            for z in l:
+                d.append(i)
+                temp_w.insert(temp_w.index(i), z)
+                # print("mod:",temp_w)
+            if len(d) != 0:
+                del temp_w[temp_w.index(d[0])]
+
+        elif "(" in i:
+            l = i.split("(")
+            l.append("(")
+            if "" in l:
+                l.remove("")
+            d = []
+            for z in l:
+                d.append(i)
+                temp_w.insert(temp_w.index(i), z)
+                # print("mod:",temp_w)
+            if len(d) != 0:
+                del temp_w[temp_w.index(d[0])]
+
+
+        elif "'" in i:
+            l = i.split("'")
+            l.insert(1, "'")
+            d = []
+            for z in l:
+                d.append(i)
+                temp_w.insert(temp_w.index(i), z)
+                # print("mod:",temp_w)
+            if len(d) != 0:
+                del temp_w[temp_w.index(d[0])]
+
+        elif "," in i:
+            l = i.split(",")
+            l.append(",")
+            if "" in l:
+                l.remove("")
+            d = []
+            for z in l:
+                d.append(i)
+                temp_w.insert(temp_w.index(i), z)
+                # print("mod:",temp_w)
+            if len(d) != 0:
+                del temp_w[temp_w.index(d[0])]
+
+        elif i.count('.') == 1:
+            l = i.split(".")
+            l.append(".")
+            if "" in l:
+                l.remove("")
+            d = []
+            for z in l:
+                d.append(i)
+                temp_w.insert(temp_w.index(i), z)
+                # print("mod:",temp_w)
+            if len(d) != 0:
+                del temp_w[temp_w.index(d[0])]
+    # new_mod.append(temp_w)
+    return temp_w
 
 def main():
     #CHANGE THESE THREE SENTENCES
-    path1 = "../../tmp/multiconer-forpp.conll"
-    path2 = "../../tmp/multiconer-pp.conll"
-    path3 = "generated_datasets/paraphrases/multiconer-test-pp.conll"
+    path1 = "../../tmp/conll03-forpp.conll"
+    path2 = "../../tmp/conll03-pp.conll"
+    path3 = "../../tmp/conll03-test-pp.conll"
 
     #Read the original sentences, tags set:
     orig_sentences = [] #list of list of tokens
@@ -95,8 +152,10 @@ def main():
     paraphrases = [] #list of list of tokens
     for line in open(path2):
         if len(line) > 1:
-            paraphrases.append(format_sentence(line.strip().lower())) #DO THIS ONLY FOR WNUT, Multiconer!
+            paraphrases.append(format_sentence(line.strip()))# - DO THIS ONLY FOR WNUT, Multiconer!
 
+    print(len(paraphrases))
+    print(len(orig_sentences))
     assert(len(orig_sentences) == len(orig_tags))
     assert(len(paraphrases) == len(orig_sentences))
 

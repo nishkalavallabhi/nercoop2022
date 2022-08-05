@@ -1,3 +1,9 @@
+when	O
+is	O
+long	B-CW
+wave	I-CW
+?	O
+
 the	O
 picture	O
 earned	O
@@ -117,13 +123,20 @@ the	O
 film	O
 microsoft	B-CW
 lync	I-CW
-shot?	O
+shot	O
+?	O
 
 how	O
 to	O
 obtain	O
 free	O
 paninaro	B-CW
+
+what	O
+exactly	O
+is	O
+lateralus	B-CW
+?	O
 
 the	O
 godzilla	B-CW
@@ -257,14 +270,15 @@ other	I-CW
 
 the	B-CW
 garden	I-CW
-(1981	O
-,	O
+1981,	O
+(	O
 #	O
 24	O
 in	O
 the	O
 united	O
-kingdom)	O
+kingdom	O
+)	O
 
 1	O
 141	O
@@ -277,11 +291,13 @@ massacre	I-CW
 /	O
 50	B-PER
 cent	I-PER
+	O
 (	O
 march	O
 6	O
 ,	O
 2005	O
+	O
 )	O
 
 ys	B-CW
@@ -291,10 +307,12 @@ basses	B-CW
 loaded	I-CW
 in	O
 2016	O
+	O
 (	O
 on	O
 planet	O
 destructo	O
+	O
 )	O
 
 following	O
@@ -562,6 +580,21 @@ played	O
 him	O
 .	O
 
+what	O
+is	O
+the	O
+meaning	O
+of	O
+the	O
+title	O
+law	B-CW
+and	I-CW
+order:	I-CW
+special	I-CW
+victims	I-CW
+unit	I-CW
+?	O
+
 where	O
 did	O
 another	B-CW
@@ -719,6 +752,16 @@ album	O
 reload	B-CW
 .	O
 
+who	O
+is	O
+the	O
+star	O
+of	O
+top	B-CW
+gear	I-CW
+3000	I-CW
+?	O
+
 10	O
 interesting	O
 facts	O
@@ -818,7 +861,8 @@ as	O
 the	O
 1917	O
 indiana	B-CW
-(often	O
+often	O
+(	O
 known	O
 simply	O
 as	O
@@ -828,6 +872,7 @@ indiana)	O
 singer	O
 anne-marie	B-PER
 david	I-PER
+	O
 (	O
 eurovision	B-CW
 winner	O
@@ -836,7 +881,17 @@ eurovision	O
 song	I-CW
 contest	I-CW
 1973	I-CW
+	O
 )	O
+
+what	O
+exactly	O
+is	O
+a	O
+tangled:	B-CW
+the	I-CW
+series	I-CW
+?	O
 
 a	O
 panel	O
@@ -935,10 +990,12 @@ the	O
 work	O
 of	O
 later	O
-(9th	O
+9th	O
+(	O
 -	O
 10th	O
-century)	O
+century	O
+)	O
 poets	O
 .	O
 
@@ -1009,12 +1066,14 @@ in	O
 the	O
 red	I-CW
 sea	I-CW
+	O
 (	O
 also	O
 known	O
 as	O
 operation	O
 brothers	O
+	O
 )	O
 
 movie	O
@@ -1078,8 +1137,10 @@ money	I-CW
 the	B-CW
 white	I-CW
 reindeer	I-CW
-(valkoinen	O
-peura)	O
+valkoinen	O
+(	O
+peura	O
+)	O
 by	O
 erik	B-PER
 blomberg	I-PER
@@ -1189,6 +1250,20 @@ gayle	B-PER
 hunnicutt	I-PER
 .	O
 
+	O
+,	O
+a	O
+promotional	O
+event	O
+for	O
+the	O
+upcoming	O
+video	O
+game	O
+sakura	B-CW
+wars	I-CW
+)	O
+
 voici	B-CW
 definition	O
 
@@ -1208,11 +1283,13 @@ is	O
 the	O
 best	O
 thriller	O
+	O
 (	O
 for	O
 domestic	O
 trailer	O
 c	O
+	O
 )	O
 
 download	O
@@ -1223,8 +1300,12 @@ gerda	I-CW
 
 cara	B-PER
 buono	I-PER
-(born	O
-1974)	O
+born	O
+	O
+(	O
+1974	O
+	O
+)	O
 is	O
 an	O
 american	O
@@ -1274,17 +1355,6 @@ old	O
 shaped	O
 his	O
 boyhood	O
-.	O
-
-the	O
-first	O
-promotional	O
-single	O
-was	O
-diana	B-CW
-(one	I-CW
-direction	I-CW
-song)	I-CW
 .	O
 
 peter	B-PER
@@ -1444,6 +1514,15 @@ abdullah	I-CW
 ke	I-CW
 kelantan	I-CW
 
+what	O
+is	O
+the	O
+meaning	O
+of	O
+iww	B-CW
+songs	I-CW
+?	O
+
 the	O
 average	O
 cost	O
@@ -1512,7 +1591,8 @@ until	O
 
 barcelona	B-CW
 metropolis	I-CW
-(2012)	O
+(2012	O
+)	O
 film	O
 
 till	B-CW
@@ -1586,6 +1666,13 @@ by	O
 patrick	O
 swayze	O
 
+what	O
+exactly	O
+is	O
+a	O
+deutsch-les-landes	B-CW
+?	O
+
 the	I-CW
 same	O
 lineup	O
@@ -1612,8 +1699,10 @@ later	O
 carmen	B-PER
 de	I-PER
 mairena	I-PER
-(born	O
-1933)	O
+born	O
+(	O
+1933	O
+)	O
 is	O
 an	O
 actress	O
@@ -1637,12 +1726,14 @@ trees	I-CW
 	O
 ,	O
 2006-2008	O
+	O
 (	O
 tv	O
 series	O
 ,	O
 16	O
 episodes	O
+	O
 )	O
 
 but	O
@@ -1747,7 +1838,8 @@ at	I-CW
 the	I-CW
 hollywood	I-CW
 bowl	I-CW
-mean?	O
+mean	O
+?	O
 
 blog	O
 about	O
@@ -1759,6 +1851,16 @@ follow	I-CW
 your	I-CW
 dreams	I-CW
 
+skylark	B-CW
+johnny	B-PER
+(	O
+mercer	I-PER
+,	O
+hoagy	B-PER
+carmichael	I-PER
+)	O
+9:12	O
+
 what	O
 is	O
 the	O
@@ -1767,13 +1869,15 @@ of	O
 suvorov	B-CW
 '	O
 s	O
-book?	O
+book	O
+?	O
 
 what	O
 exactly	O
 does	O
 shred	B-CW
-mean?	O
+mean	O
+?	O
 
 he	O
 had	O
@@ -1932,7 +2036,8 @@ f-zero:	B-CW
 gp	I-CW
 legend	I-CW
 in	O
-networking?	O
+networking	O
+?	O
 
 mukhtasar	B-CW
 in	O
@@ -2054,6 +2159,7 @@ the	O
 television	O
 series	O
 friends	B-CW
+	O
 (	O
 and	O
 other	O
@@ -2061,6 +2167,7 @@ characters	O
 from	O
 the	O
 show	O
+	O
 )	O
 
 the	B-CW
@@ -2364,9 +2471,11 @@ lauren	B-PER
 bennett	I-PER
 and	O
 goonrock	B-PER
+	O
 (	O
 53	O
 weeks	O
+	O
 )	O
 
 computer	B-PROD
@@ -2409,6 +2518,15 @@ of	O
 pressure	B-CW
 chief	I-CW
 
+when	O
+was	O
+the	O
+initial	O
+release	O
+of	O
+rent-a-goalie	B-CW
+?	O
+
 the	O
 commercial	O
 ran	O
@@ -2441,6 +2559,12 @@ not	O
 classic	O
 ipods	O
 .	O
+
+what	O
+exactly	O
+is	O
+paq	B-CW
+?	O
 
 first	B-CW
 dance	I-CW
@@ -2493,18 +2617,20 @@ destiny	I-CW
 
 veronica	B-CW
 mars	I-CW
-(2004-2007	O
-,	O
-2019)	O
-(creator	O
-,	O
+2004-2007,	O
+(	O
+2019	O
+)	O
+creator,	O
+(	O
 writer	O
 ,	O
 executive	O
 producer	O
 ,	O
 and	O
-director)	O
+director	O
+)	O
 
 windows	B-CW
 pe	I-CW
@@ -2524,7 +2650,8 @@ according	O
 to	O
 the	O
 mishnah	B-CW
-(when	O
+when	O
+(	O
 the	O
 offence	O
 is	O
@@ -2535,7 +2662,9 @@ kareth	O
 applies	O
 to	O
 both	O
-parties):	O
+parties	O
+:	O
+)	O
 
 deep	B-GRP
 purple	I-GRP
@@ -2692,14 +2821,16 @@ novel	O
 pride	B-CW
 and	I-CW
 prejudice	I-CW
-(written	O
+written	O
+(	O
 in	O
 1796	O
 and	O
 published	O
 in	O
-1813)	O
+1813	O
 ,	O
+)	O
 jane	B-PER
 austen	I-PER
 mentions	O
@@ -2817,6 +2948,13 @@ australian	O
 imperia	B-CW
 online	I-CW
 
+what	O
+exactly	O
+is	O
+a	O
+helldorado	B-CW
+?	O
+
 law	O
 of	O
 mega	B-CW
@@ -2863,6 +3001,15 @@ three	B-CW
 free	O
 blind	I-CW
 mouseketeers	I-CW
+
+what	O
+exactly	O
+is	O
+a	O
+kronet	B-CW
+til	I-CW
+konge	I-CW
+?	O
 
 definition	O
 of	O
@@ -2952,6 +3099,23 @@ body	O
 "	O
 .	O
 
+#	O
+minnie	B-CW
+the	I-CW
+moocher	I-CW
+cab	B-PER
+(	O
+calloway	I-PER
+,	O
+clarence	B-PER
+gaskill	I-PER
+,	O
+and	O
+irving	B-PER
+mills	I-PER
+)	O
+2:47	O
+
 look	O
 out	O
 for	O
@@ -3022,6 +3186,7 @@ gary	B-PER
 go	I-PER
 -	O
 cinema	B-CW
+	O
 (	O
 48	O
 weeks	O
@@ -3030,6 +3195,7 @@ weeks	O
 2011	O
 –	O
 2012	O
+	O
 )	O
 
 director	O
@@ -3064,12 +3230,14 @@ olympics	I-CW
 
 terpidana	I-CW
 ponirah	B-CW
+	O
 (	O
 ponirah	O
 is	O
 convicted	O
 ;	O
 1984	O
+	O
 )	O
 
 blitzstein	O
@@ -3282,7 +3450,8 @@ bible:	O
 new	B-CW
 living	I-CW
 translation	I-CW
-(nlt)	O
+(nlt	O
+)	O
 was	O
 published	O
 in	O
@@ -3706,6 +3875,7 @@ size	O
 
 #	O
 summertime	B-CW
+	O
 (	O
 george	B-PER
 gershwin	I-PER
@@ -3717,6 +3887,7 @@ heyward	I-PER
 ,	O
 ira	B-PER
 gershwin	O
+	O
 )	O
 –	O
 4	O
@@ -3768,10 +3939,16 @@ bang-a-bang	I-CW
 
 crazy	B-CW
 paradise	I-CW
+	O
+	O
+	O
 (	O
 det	O
 tossede	O
 paradis	O
+	O
+	O
+	O
 )	O
 	O
 ,	O
@@ -3830,8 +4007,10 @@ book	O
 kimono	B-CW
 my	I-CW
 house	I-CW
+	O
 (	O
 sparks	B-GRP
+	O
 )	O
 –	O
 3	O
@@ -4491,13 +4670,24 @@ did	O
 the	O
 magical	O
 magic	I-CW
-appear?	O
+appear	O
+?	O
 
 who	O
 made	O
 blah	I-CW
 blah	O
 blah	O
+
+is	O
+the	I-CW
+salisbury	B-CW
+cathedral	I-CW
+poisonous	O
+from	I-CW
+the	O
+meadows	I-CW
+?	O
 
 novels	O
 ,	O
@@ -4536,9 +4726,11 @@ legend	I-CW
 of	O
 darkmoon	I-CW
 take	O
-place?	O
+place	O
+?	O
 
 iznogoud	B-CW
+	O
 (	O
 1995	O
 	O
@@ -4558,6 +4750,7 @@ bbc	B-CORP
 and	O
 rtl	B-CORP
 4	I-CORP
+	O
 )	O
 
 denning	O
@@ -4663,6 +4856,13 @@ funding	O
 last	B-CW
 princess	I-CW
 coding	O
+
+how	O
+do	O
+you	O
+pronounce	O
+computerra	B-CW
+?	O
 
 in	O
 his	O
