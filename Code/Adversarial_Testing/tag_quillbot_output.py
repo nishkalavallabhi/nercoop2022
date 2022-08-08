@@ -127,9 +127,9 @@ def format_sentence(sentence):
 
 def main():
     #CHANGE THESE THREE SENTENCES
-    path1 = "../../tmp/conll03-forpp.conll"
-    path2 = "../../tmp/conll03-pp.conll"
-    path3 = "../../tmp/conll03-test-pp.conll"
+    path1 = "../../tmp/wnut-forpp.conll"
+    path2 = "../../tmp/wnut-pp.conll"
+    path3 = "../../tmp/wnut-test-pp.conll"
 
     #Read the original sentences, tags set:
     orig_sentences = [] #list of list of tokens
