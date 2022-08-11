@@ -13,18 +13,23 @@ What are some simple, existing methods to generate adversarial test sets for NER
 - Changing the context a little bit
    - using a masked language model (in RockNER paper). 
    
-What we can add, while doing most of these:
-- Random sampling and replacement within the train/dev/test sets (as a strong baseline). 
-- Using sentences from other NER datasets, with similar entity type distribution within the sentence  
-- Using entity linking. 
-- Using simple masking approaches and data augmentation methods (e.g., nlpaug).   
+What we do:
+- Random sampling and replacement within the test set (as a strong baseline). 
+- Using faker for PER/LOC
+- Masking with LMs   
 - Paraphrasing with quillbot (manually)
+- Random sampling + masking
 
 Test datasets:   
-English: conll-03, wnut, multiconer, ontonotes (first 3 are open/free). 
+English: conll-03, wnut, multiconer 
 German: conll-03, multiconer. 
+Hindi: multiconer
 
-NER methods to compare original and modified test sets: generic BERT fine tuning approach, dataset specific pre-existing models (e.g., Spacy for OntoNotes etc)
+NER methods to compare original and modified test sets: generic BERT fine tuning approach, dataset specific pre-existing models:  
+CONLL-03 EN/DE: Stanza, Flair, tner 
+WNUT: tner 
+Multiconer-EN: tner
+Multiconer-HI: tner?
 
 If everything is setup and running smoothly, we can look into one or two other languages later on (say Hindi - multiconer)
 
