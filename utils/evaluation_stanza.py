@@ -5,6 +5,9 @@ from seqeval.metrics import f1_score
 import sys
 import itertools
 
+snlp = spacy_stanza.load_pipeline(name="de", processors={'ner': 'conll03'}, tokenize_pretokenized=True)
+print("Models loaded, and they assume whitespace tokenized text")
+
 def read_file(filepath, sep):
     fh = open(filepath)
     sentences = []
@@ -27,8 +30,6 @@ def read_file(filepath, sep):
     return sentences, netags
 
 def eval_stanza(mypath, sep):
-    snlp = spacy_stanza.load_pipeline(name="en", processors={'ner': 'conll03'}, tokenize_pretokenized=True)
-    print("Models loaded, and they assume whitespace tokenized text")
     stanza_netags = []
     gold_sen, gold_ner = read_file(mypath, sep)
     for sen in gold_sen:
@@ -46,12 +47,26 @@ def eval_stanza(mypath, sep):
     print("Classification report for Stanza NER: ")
     print(classification_report(gold_ner, stanza_netags, digits=4))
 
-print("Stanza model's performance on paraphrased dataset")
-mypath2 = "../code/Adversarial_Testing/generated_datasets/paraphrases/conll03-test-pp.conll"
+print("Stanza model's performance on standard test set")
+mypath1 = "../code/Adversarial_Testing/generated_datasets/Original Test data/conll_deu_test.txt"
+eval_stanza(mypath1, sep="\t")
+
+"""
+print("Stanza model's performance on random sampling dataset")
+mypath2 = "../code/Adversarial_Testing/generated_datasets/random_sampling/perturb_conll_deu_test.txt"
 eval_stanza(mypath2, sep="\t")
 
-print("Stanza model's performance on standard test set")
-mypath1 = "/Users/Vajjalas/Downloads/NERProjects-Ongoing/conll-03-en/test.txt"
-eval_stanza(mypath1, sep=" ")
+print("Stanza model's performance on faker dataset")
+mypath2 = "../code/Adversarial_Testing/generated_datasets/faker_per+loc/faker_conll_deu_test.txt"
+eval_stanza(mypath2, sep="\t")
 
+
+print("Stanza model's performance on masking dataset")
+mypath2 = "../code/Adversarial_Testing/generated_datasets/Masking/masked_conll_deu.txt"
+eval_stanza(mypath2, sep="\t")
+
+#print("Stanza model's performance on paraphrased dataset")
+#mypath2 = "../code/Adversarial_Testing/generated_datasets/paraphrases/conll03-test-pp.conll"
+#eval_stanza(mypath2, sep="\t")
+"""
 
