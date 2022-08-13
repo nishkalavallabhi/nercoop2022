@@ -1,0 +1,6 @@
+
+- Understanding transfer in NER
+     - Cross-lingual transfer (zero-shot, few shot, how much training data do we need in cross-lingual transfer etc)
+
+- Improving robustness of NER models 
+     - Approaches for making NER more generalizable?
