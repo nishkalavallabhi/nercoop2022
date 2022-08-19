@@ -1,9 +1,10 @@
+from unittest.util import _MAX_LENGTH
 from more_itertools import windowed
 from sklearn.model_selection import train_test_split
-from transformers import DistilBertTokenizerFast
 import numpy as np
-from transformers import DistilBertForTokenClassification
-from transformers import DistilBertForTokenClassification, Trainer, TrainingArguments
+from transformers import Trainer, TrainingArguments
+from transformers import AutoConfig, AutoModelForTokenClassification
+from transformers import AutoTokenizer
 import torch
 import evaluate
 from seqeval.metrics import f1_score, precision_score, recall_score, classification_report
@@ -18,7 +19,7 @@ def get_conll_data(filepath, sep="\t", allow_long_sentences=False, test=False) -
     """
     # set to default directory if nothing else has been provided by user.
     # read data from file.
-    fh = open(filepath, encoding="utf-8")
+    fh = open(filepath, encoding="utf-8-sig")
     threshold = 100
     steps = 99
     sentences = []
@@ -29,8 +30,8 @@ def get_conll_data(filepath, sep="\t", allow_long_sentences=False, test=False) -
         if len(line)>1 and  not line.startswith("# id"):
             splits = line.strip().split(sep)
             if len(splits) > 1:
-                tempsen.append(splits[0].strip())
-                tempnet.append(splits[-1].strip())
+                tempsen.append(str(splits[0].strip()))
+                tempnet.append(str(splits[-1].strip()))
         else:
             if tempsen and tempnet:
               if allow_long_sentences:
@@ -61,7 +62,8 @@ def encode_tags(tags, encodings):
         # create an empty array of -100
         doc_enc_labels = np.ones(len(doc_offset),dtype=int) * -100
         arr_offset = np.array(doc_offset)
-
+        # print("No. of doc_labels:", len(doc_labels))
+        # print("No. of offset:", len(doc_enc_labels))
         # set labels whose first offset position is 0 and the second is not 0
         doc_enc_labels[(arr_offset[:,0] == 0) & (arr_offset[:,1] != 0)] = doc_labels
         encoded_labels.append(doc_enc_labels.tolist())
@@ -100,6 +102,8 @@ def compute_metrics(p):
     ]
 
     results = metric.compute(predictions=true_predictions, references=true_labels)
+    print("Final Test Results")
+    print(classification_report(true_predictions, true_labels))
     final_results = {}
     for key, value in results.items():
         if isinstance(value, dict):
@@ -110,39 +114,96 @@ def compute_metrics(p):
     return final_results
 
 
+def evaluate_wiesp(model_path, test_dataset, unique_tags):
+    
+    model = AutoModelForTokenClassification.from_pretrained(model_path, num_labels=len(unique_tags))
+    tester = Trainer(
+        model=model,                         
+        eval_dataset=test_dataset,
+        compute_metrics=compute_metrics            
+    )
+    metrics = tester.evaluate()
+    print("Printing from metrics dictionary...")
+    for key, value in metrics.items():
+        print(key,": ",value)
+
 if __name__ == "__main__":
 
     data = get_conll_data("wiesp/wiesp_train.conll", allow_long_sentences=True) #Enter path of train data in conll format
-    texts = data['sentences']
-    tags = data['tags']
-    unique_tags = set(tag for doc in tags for tag in doc)
+
+    test_data = get_conll_data("wiesp/wiesp_dev.conll")
+    test_texts = test_data['sentences'] 
+    test_tags = test_data['tags']
+
+    tags_predicted = []
+    senlen = 100#restricting the length of the sentences
+    new_sen = []
+    new_tags = []
+    # print("Length before:",len(test_texts))
+    for sentence in range(len(test_texts)):
+    
+        if len(test_texts[sentence]) > senlen:
+            # print("inside if")
+            temp_split = []
+            temp_tags = []
+            for i in range(0,len(test_texts[sentence]), senlen):
+                temp_split.append(test_texts[sentence][i:i+senlen])
+                temp_tags.append(test_tags[sentence][i:i+senlen])
+            # print("Temp split:",len(temp_split))
+            for j in range(len(temp_split)):
+                new_sen.append(temp_split[j])
+                new_tags.append(temp_tags[j])
+        else:
+            # print('going into else')
+            new_sen.append(test_texts[sentence])
+            new_tags.append(test_tags[sentence])
+    
+
+    test_texts = new_sen 
+    test_tags = new_tags
+
+    
+    train_texts = data['sentences']
+    train_tags = data['tags']
+    unique_tags = set(tag for doc in train_tags for tag in doc)
     tag2id = {tag: id for id, tag in enumerate(unique_tags)}
     id2tag = {id: tag for tag, id in tag2id.items()}
 
-    train_texts, val_texts, train_tags, val_tags = train_test_split(texts, tags, test_size=.2)
+    # train_texts, val_texts, train_tags, val_tags = train_test_split(texts, tags, test_size=0)
 
-    tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-cased')
-    train_encodings = tokenizer(train_texts, is_split_into_words=True, return_offsets_mapping=True, padding=True, truncation=True)
-    val_encodings = tokenizer(val_texts, is_split_into_words=True, return_offsets_mapping=True, padding=True, truncation=True)
-    # test_encodings = tokenizer(test_texts, is_split_into_words=True, return_offsets_mapping=True, padding=True, truncation=True)
+    tokenizer = AutoTokenizer.from_pretrained('distilbert-base-cased')
+    # tokenizer = AutoTokenizer.from_pretrained('bert-base-cased')
+    # tokenizer = AutoTokenizer.from_pretrained('xlnet-base-cased')
+    # tokenizer = AutoTokenizer.from_pretrained('roberta-base', add_prefix_space=True)
+
+    
+    
+    train_encodings = tokenizer(train_texts, is_split_into_words=True, return_offsets_mapping=True, padding='max_length', truncation=True, max_length = 100)
+    # val_encodings = tokenizer(val_texts, is_split_into_words=True, return_offsets_mapping=True, padding=True, truncation=True)
+    test_encodings = tokenizer(test_texts, is_split_into_words=True, return_offsets_mapping=True, padding='max_length', truncation=True, max_length = 100)
 
     train_labels = encode_tags(train_tags, train_encodings)
-    val_labels = encode_tags(val_tags, val_encodings)
-    # test_labels = encode_tags(test_tags, test_encodings)
+    # val_labels = encode_tags(val_tags, val_encodings)
+    test_labels = encode_tags(test_tags, test_encodings)
 
     train_encodings.pop("offset_mapping") # we don't want to pass this to the model
-    val_encodings.pop("offset_mapping")
+    # val_encodings.pop("offset_mapping")
+    test_encodings.pop("offset_mapping")
 
     train_dataset = NERDataset(train_encodings, train_labels)
-    val_dataset = NERDataset(val_encodings, val_labels)
+    # val_dataset = NERDataset(val_encodings, val_labels)
+    test_dataset = NERDataset(test_encodings, test_labels)
 
    
+    model = AutoModelForTokenClassification.from_pretrained('distilbert-base-cased', num_labels=len(unique_tags))
+    # model = AutoModelForTokenClassification.from_pretrained('bert-base-cased', num_labels=len(unique_tags))
+    # model = AutoModelForTokenClassification.from_pretrained('xlnet-base-cased', num_labels=len(unique_tags))
+    # model = AutoModelForTokenClassification.from_pretrained('roberta-base', num_labels=len(unique_tags))
 
-    model = DistilBertForTokenClassification.from_pretrained('distilbert-base-cased', num_labels=len(unique_tags))
 
 
     training_args = TrainingArguments(
-        output_dir='hugging_face/resultsx',          # output directory
+        output_dir='hugging_face/results_dbert',          # output directory
         num_train_epochs=5,              # total number of training epochs
         per_device_train_batch_size=16,  # batch size per device during training
         per_device_eval_batch_size=64,   # batch size for evaluation
@@ -157,13 +218,18 @@ if __name__ == "__main__":
         model=model,                         # the instantiated 🤗 Transformers model to be trained
         args=training_args,                  # training arguments, defined above
         train_dataset=train_dataset,         # training dataset
-        eval_dataset=val_dataset,
+        eval_dataset=test_dataset,
         compute_metrics=compute_metrics             # evaluation dataset
     )
 
     trainer.train()
-    checkpoint_path = "hugging_face/wiesp_checkpoint"
+    checkpoint_path = "hugging_face/wiesp_checkpoint_dbert/"
     trainer.save_model(checkpoint_path)
 
+    # evaluate_wiesp(checkpoint_path, test_dataset, unique_tags)
+
     metrics = trainer.evaluate()
-    print(metrics)
+    # print("Printing from metrics dictionary...")
+    # for key, value in metrics.items():
+    #     print(key,": ",value)
+    
