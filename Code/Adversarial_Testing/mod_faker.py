@@ -9,7 +9,8 @@ import argparse
 def replace_entities(input_file, output_file):
 
     fake = Faker(['en-US', 'en-CA', 'en-IN']) #This can be changed to many other options. 
-    # fake = Faker(['de', 'de-AT', 'de-CH', 'de-DE']) #Uncomment for german test set
+    # fake = Faker(['de', 'de-AT', 'de-CH', 'de-DE']) # Uncomment for German
+    # fake = Faker(['hi-IN']) # Uncomment for Hindi
     fh = open(input_file, encoding = "utf-8")
     fw = open(output_file, "w", encoding="utf-8")
     numcols = 2
