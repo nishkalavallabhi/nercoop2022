@@ -1,4 +1,3 @@
-import skweak
 import random
 import argparse
 
