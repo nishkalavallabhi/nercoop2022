@@ -99,6 +99,7 @@ def main(args):
   data = pd.read_csv(args.input_file, sep="\t")
   data = data.fillna(method="ffill")
 
+  # Replace double quotes(") with '$#$' in all the input test sentences before feeding it to the argparser
   for i in range(len(data["Word"])):
     if data['Word'][i] == "$#$":
       data['Word'][i] = '"'
