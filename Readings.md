@@ -51,5 +51,9 @@
 
 **Multi/Cross-lingual NER**    
 [An Unsupervised Multiple-Task and Multiple-Teacher Model for Cross-lingual Named Entity Recognition](), ACL 2022.  
-[Composable Sparse Fine-Tuning for Cross-Lingual Transfer](https://arxiv.org/abs/2110.07560), ACL 2022. [Code](https://github.com/cambridgeltl/composable-sft)  
-TODO
+[Composable Sparse Fine-Tuning for Cross-Lingual Transfer](https://arxiv.org/abs/2110.07560), ACL 2022. [Code](https://github.com/cambridgeltl/composable-sft)    
+[Language-Family Adapters for Multilingual Neural Machine Translation](https://arxiv.org/abs/2209.15236), ArXiv, Sep 2022.  
+[Lifting the Curse of Multilinguality by Pre-training Modular Transformers](https://aclanthology.org/2022.naacl-main.255.pdf), NAACL 2022.  
+[Sources of Transfer in Multilingual Named Entity Recognition](https://aclanthology.org/2020.acl-main.720) (Mueller et al., ACL 2020).  
+[Unsupervised cross-lingual model transfer for named entity recognition with contextualized word representations](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0257230), PLoS One, 2021.
+
