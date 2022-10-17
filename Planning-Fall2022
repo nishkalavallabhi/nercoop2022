@@ -20,7 +20,10 @@ Notes on 17 Oct 2022:
 
 - Extend the experiments to multiconer dataset.    
 
-- Explore other architectures for NER (using transformer model embeddings as just initial step). 
+- Explore other architectures for NER (using transformer model embeddings as just initial step).   
+
+- Check if using pre-trained modular transformers ([Pfeiffer et.al., NAACL 2022](https://aclanthology.org/2022.naacl-main.255.pdf)) + fine-tuning on NER task is any better than using regular pre-trained models+fine-tuning or pre-trained models+adapters  
+
   
   
   
