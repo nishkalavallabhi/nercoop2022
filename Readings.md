@@ -65,4 +65,5 @@ Others:
 [SpanNER](https://github.com/neulab/SpanNER). 
 [SpanBERT](https://github.com/facebookresearch/SpanBERT). 
 [ByT5](https://github.com/google-research/byt5). 
+[SetFit](https://huggingface.co/blog/setfit). 
 
