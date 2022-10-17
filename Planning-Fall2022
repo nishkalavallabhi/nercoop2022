@@ -8,6 +8,23 @@ End of Sep, 1st week of Oct: Reading on cross-lingual transfer.
 Oct-Nov: explore cross-lingual transfer approaches for NER.  
 (few shot or zero shot. Goal: how can we reuse NER model trained on one language on another language). 
 
+***********
+
+Notes on 17 Oct 2022:  
+- Following approaches in [Sources of Transfer in Multilingual Named Entity Recognition](https://aclanthology.org/2020.acl-main.720) (Mueller et al., ACL 2020)
+ and [Unsupervised cross-lingual model transfer for named entity recognition with contextualized word representations](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0257230) (Yan et.al, Plos One, 2021) 
+ with the [CONLL-2002 (Spanish, Dutch)](https://huggingface.co/datasets/conll2002) and [CONLL-2003 (English, German)](https://huggingface.co/datasets/conll2003) NER datasets
+ 
+ (comparing monolingual models with multilingual models and multilingual+fine-tuned to a language models, zero-shot transfer with models trained on 1-n
+  source languages, exploring adapter approaches (e.g., one large transformer model +adapters for each language NER) etc.  
+
+- Extend the experiments to multiconer dataset.    
+
+- Explore other architectures for NER (using transformer model embeddings as just initial step). 
+  
+  
+  
+***********
 Dec: Wrapping up, writing up a report.  
 
 Topics:
