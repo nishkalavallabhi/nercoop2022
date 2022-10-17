@@ -8,6 +8,7 @@
 - [Weak supervision](https://www.snorkel.org/blog/weak-supervision), a general overview on Snorkel blog.   
 - [Few shot learning](https://analyticsindiamag.com/an-introductory-guide-to-few-shot-learning-for-beginners/) - an overview blog post. [a listing of papers on the topic](https://github.com/zhjohnchan/awesome-few-shot-learning-in-nlp#survey)
 - [Huggingface Course](https://huggingface.co/course/chapter1/1)  
+- [A Primer on Pretrained Multilingual Language Models](https://arxiv.org/abs/2107.00676), ArXiv, 2021.  
 
 **NER: Overview of main approaches:**    
 - [Named Entity Recognition: A Literature Survey](https://www.cfilt.iitb.ac.in/resources/surveys/rahul-ner-survey.pdf), 2014 Technical report.   
@@ -29,7 +30,8 @@
 [CONTaiNER: Few-Shot Named Entity Recognition via Contrastive Learning](https://arxiv.org/abs/2109.07589), ACL 2022  
 [Good Examples Make A Faster Learner: Simple Demonstration-based Learning for Low-resource NER](https://arxiv.org/abs/2110.08454), ACL 2022  
 [MELM: Data Augmentation with Masked Entity Language Modeling for Low-Resource NER](https://arxiv.org/abs/2108.13655), ACL 2022    
-[Label Semantics for Few Shot Named Entity Recognition](https://arxiv.org/abs/2203.08985), Findings of ACL 2022
+[Label Semantics for Few Shot Named Entity Recognition](https://arxiv.org/abs/2203.08985), Findings of ACL 2022. 
+[Automatic Creation of Named Entity Recognition Datasets by Querying Phrase Representations](https://arxiv.org/abs/2210.07586), ArXiv, Oct 2022.   
 
 **Data Augmentation, Adversarial inputs, and other ways of transforming NER datasets**  
 [SeqMix: Augmenting Active Sequence Labeling via Sequence Mixup](https://rongzhizhang.org/pdf/emnlp20_SeqMix.pdf), EMNLP 2020    
@@ -55,5 +57,12 @@
 [Language-Family Adapters for Multilingual Neural Machine Translation](https://arxiv.org/abs/2209.15236), ArXiv, Sep 2022.  
 [Lifting the Curse of Multilinguality by Pre-training Modular Transformers](https://aclanthology.org/2022.naacl-main.255.pdf), NAACL 2022.  
 [Sources of Transfer in Multilingual Named Entity Recognition](https://aclanthology.org/2020.acl-main.720) (Mueller et al., ACL 2020).  
-[Unsupervised cross-lingual model transfer for named entity recognition with contextualized word representations](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0257230), PLoS One, 2021.
+[Unsupervised cross-lingual model transfer for named entity recognition with contextualized word representations](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0257230), PLoS One, 2021.  
+[Language Contamination Helps Explain the Cross-lingual Capabilities of English Pretrained Models](https://arxiv.org/abs/2204.08110), EMNLP 2022.  
+[Zero-Resource Cross-Lingual Named Entity Recognition](https://ojs.aaai.org/index.php/AAAI/article/view/6237), AAAI 2020.  
+
+Others:
+[SpanNER](https://github.com/neulab/SpanNER). 
+[SpanBERT](https://github.com/facebookresearch/SpanBERT). 
+[ByT5](https://github.com/google-research/byt5). 
 
