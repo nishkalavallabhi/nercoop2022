@@ -24,17 +24,9 @@ Notes on 17 Oct 2022:
 
 - Check if using pre-trained modular transformers ([Pfeiffer et.al., NAACL 2022](https://aclanthology.org/2022.naacl-main.255.pdf)) + fine-tuning on NER task is any better than using regular pre-trained models+fine-tuning or pre-trained models+adapters  
 
+- [SpanNER](https://github.com/neulab/SpanNER), [SpanBERT](https://github.com/facebookresearch/SpanBERT) approaches - will they be useful?   
+
   
-  
-  
+ 
 ***********
 Dec: Wrapping up, writing up a report.  
-
-Topics:
-- Understanding transfer in NER
-     - Cross-lingual transfer (zero-shot, few shot, how much training data do we need in cross-lingual transfer etc). 
-
-- Improving robustness of NER models in cross-lingual setups.    
-     - Approaches for making NER more generalizable.    
-     - Fine-tuning methods for cross-lingual setups.   
-     - Cross-lingual modular models etc https://aclanthology.org/2022.naacl-main.255/. 
