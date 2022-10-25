@@ -1,0 +1,8 @@
+LICENSE
+README.md
+setup.py
+src/ner.egg-info/PKG-INFO
+src/ner.egg-info/SOURCES.txt
+src/ner.egg-info/dependency_links.txt
+src/ner.egg-info/not-zip-safe
+src/ner.egg-info/top_level.txt
