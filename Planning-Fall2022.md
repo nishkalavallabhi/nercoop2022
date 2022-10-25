@@ -25,8 +25,15 @@ Notes on 17 Oct 2022:
 - Check if using pre-trained modular transformers ([Pfeiffer et.al., NAACL 2022](https://aclanthology.org/2022.naacl-main.255.pdf)) + fine-tuning on NER task is any better than using regular pre-trained models+fine-tuning or pre-trained models+adapters  
 
 - [SpanNER](https://github.com/neulab/SpanNER), [SpanBERT](https://github.com/facebookresearch/SpanBERT) approaches - will they be useful?   
-
-  
  
 ***********
+
+Notes on 25th october 2022:  
+- Check on the ensemble implementations in SpanNER and [Hassan et.al., Multcioner shared task paper, 2022](https://aclanthology.org/2022.semeval-1.218/). 
+- explore [Xformers](https://github.com/facebookresearch/xformers), and whether it is relevant?   
+- How to follow an ensembling approach in this situation:  
+    * Multiple full NER models   
+    * NER models trained on slices of data grouped by some criterion?  (e.g., difficult slices (what is difficulty?), per category slices etc). 
+
+************
 Dec: Wrapping up, writing up a report.  
