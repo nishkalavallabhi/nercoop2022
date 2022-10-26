@@ -34,6 +34,10 @@ Notes on 25th october 2022:
 - How to follow an ensembling approach in this situation:  
     * Multiple full NER models   
     * NER models trained on slices of data grouped by some criterion?  (e.g., difficult slices (what is difficulty?), per category slices etc). 
-
 ************
+
+Notes on 26th October 2022:
+I spent sometime thinking about what models you should train and experiment on. Here is what I am thinking right now: replicate the Mueller et.al. (2020) paper’s models (i.e., word CRF, char CRF, byte to span, mbert+finetune), and add a bunch of pre-trained language models trained with word/subword/character tokenizations (mbert, xlnet, may be one more multilingual model, and tokenizer free ones (byt5, any other) - for these, you can look at both full fine tuning as well as adapters. Finally: modular transformers (NAACL 2022 paper Pfeiffer et.al) and SpanNER approaches too.  Everything in monolingual, multilingual, zero shot, and multilingual+language specific finetuning setups. - Lot of experiments to do, but most of this is straight forward…. We are primarily looking at stringing together existing implementations, and not re-inventing anything from scratch.
+
+************. 
 Dec: Wrapping up, writing up a report.  
