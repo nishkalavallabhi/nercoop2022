@@ -40,4 +40,10 @@ Notes on 26th October 2022:
 I spent sometime thinking about what models you should train and experiment on. Here is what I am thinking right now: replicate the Mueller et.al. (2020) paper’s models (i.e., word CRF, char CRF, byte to span, mbert+finetune), and add a bunch of pre-trained language models trained with word/subword/character tokenizations (mbert, xlnet, may be one more multilingual model, and tokenizer free ones (byt5, any other) - for these, you can look at both full fine tuning as well as adapters. Finally: modular transformers (NAACL 2022 paper Pfeiffer et.al) and SpanNER approaches too.  Everything in monolingual, multilingual, zero shot, and multilingual+language specific finetuning setups. - Lot of experiments to do, but most of this is straight forward…. We are primarily looking at stringing together existing implementations, and not re-inventing anything from scratch.
 
 ************. 
+
+Notes on 21st November 2022:
+<img width="655" alt="Screen Shot 2022-11-21 at 9 59 16 AM" src="https://user-images.githubusercontent.com/7221440/203087359-9f954bb2-7385-4cb4-91c3-ad933b7e4a09.png">
+
+*********
+
 Dec: Wrapping up, writing up a report.  
