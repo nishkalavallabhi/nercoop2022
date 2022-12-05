@@ -1,0 +1,114 @@
+accumulate_grad_batches: 1
+adam_epsilon: 1.0e-08
+amp_backend: native
+amp_level: O2
+auto_lr_find: false
+auto_scale_batch_size: false
+auto_select_gpus: false
+batch_size: 2
+benchmark: false
+bert_config_dir: bert-base-multilingual-uncased
+bert_dropout: 0.2
+bert_max_length: 128
+best_dev_f1: 0.0
+check_val_every_n_epoch: 1
+checkpoint_callback: true
+data_dir: data/conll_deu
+dataname: conll03
+default_root_dir: output/train_logs/conll03/spanner_bert-base-multilingual-uncased_spMLen_usePruneTrue_useSpLenTrue_useSpMorphTrue_SpWtTrue_value0.5_21113215
+deterministic: false
+distributed_backend: dp
+early_stop_callback: false
+fast_dev_run: false
+final_div_factor: 10000.0
+fp_epoch_result: output/train_logs/conll03/spanner_bert-base-multilingual-uncased_spMLen_usePruneTrue_useSpLenTrue_useSpMorphTrue_SpWtTrue_value0.5_21113215/epoch_results.txt
+gpus: 0,
+gradient_clip_val: 1.0
+label2idx_list:
+- !!python/tuple
+  - O
+  - 0
+- !!python/tuple
+  - ORG
+  - 1
+- !!python/tuple
+  - PER
+  - 2
+- !!python/tuple
+  - LOC
+  - 3
+- !!python/tuple
+  - MISC
+  - 4
+limit_test_batches: 1.0
+limit_train_batches: 1.0
+limit_val_batches: 1.0
+log_gpu_memory: null
+log_save_interval: 100
+logger: true
+lr: 1.0e-05
+max_epochs: 8
+max_spanLen: 4
+max_steps: null
+min_epochs: 1
+min_steps: null
+modelName: spanner_bert-base-multilingual-uncased_spMLen_usePruneTrue_useSpLenTrue_useSpMorphTrue_SpWtTrue_value0.5
+model_dropout: 0.2
+morph2idx_list:
+- !!python/tuple
+  - isupper
+  - 1
+- !!python/tuple
+  - islower
+  - 2
+- !!python/tuple
+  - istitle
+  - 3
+- !!python/tuple
+  - isdigit
+  - 4
+- !!python/tuple
+  - other
+  - 5
+morph_emb_dim: 100
+n_class: 5
+neg_span_weight: 0.5
+num_nodes: 1
+num_processes: 1
+num_sanity_val_steps: 2
+optimizer: adamw
+overfit_batches: 0.0
+overfit_pct: null
+param_name: epoch8_batchsize2_lr1e-5_maxlen128
+precision: 16
+prepare_data_per_node: true
+pretrained_checkpoint: ''
+process_position: 0
+profiler: null
+progress_bar_refresh_rate: 1
+random_int: '21113215'
+reload_dataloaders_every_epoch: false
+replace_sampler_ddp: true
+resume_from_checkpoint: null
+row_log_interval: 50
+spanLen_emb_dim: 100
+span_combination_mode: x,y
+sync_batchnorm: false
+terminate_on_nan: false
+test_percent_check: null
+tokenLen_emb_dim: 50
+track_grad_norm: -1
+train_percent_check: null
+truncated_bptt_steps: null
+use_morph: true
+use_prune: true
+use_spanLen: true
+use_span_weight: true
+use_tokenLen: false
+val_check_interval: 0.25
+val_percent_check: null
+warmup_steps: 0
+weight_decay: 0.01
+weights_save_path: null
+weights_summary: top
+workers: 0
