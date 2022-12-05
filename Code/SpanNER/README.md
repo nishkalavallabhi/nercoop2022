@@ -81,13 +81,6 @@ Here, we give CoNLL-2003 as an example. You may need to change the `DATA_DIR`, `
 
 
 
-
-### Results at a Glance
-<div  align="center">
- <img src="pic/comb_res.png" width = "600" alt="d" align=center />
-</div>
-
-
 ## Bib
 
 ```
