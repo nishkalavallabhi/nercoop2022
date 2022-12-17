@@ -40,6 +40,10 @@ def main(args):
     print("Random seed:",args.seed)
     model.train()
 
+    if args.load_model is not None:
+        model.load_network_from_file(args.load_model)
+        print("Loading model...")
+
     if args.save_model is not None:
         model.save_network(args.save_model)
         print("Saved the model")
@@ -69,6 +73,8 @@ if __name__ == "__main__":
     parser.add_argument("--test_file", help="Path for validation file without true values, in conll format", required=True) 
     parser.add_argument("--seed", help="Random Seed, if needed", default=None)
     parser.add_argument("--save_model", help="Path to save the model, if needed", default=None)
+    parser.add_argument("--load_model", help="Path to load the model from, if needed", default=None)
+
     parser.add_argument("--epochs", help="Number of Epochs, if needed", default=None)
     parser.add_argument("--prop", help="Proportion of train data, if needed", default=None)
     args=parser.parse_args()

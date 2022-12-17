@@ -8,8 +8,8 @@ import pprint
 
 def main(args):
 
-    #multiconer_tags = ['B-PER','I-PER', 'B-PROD', 'I-PROD', 'B-GRP', 'I-GRP', 'B-CW', 'I-CW','B-CORP', 'I-CORP','B-LOC', 'I-LOC']
-    conll_tags = ['B-PER','I-PER','B-ORG','I-ORG','B-LOC', 'I-LOC', 'B-MISC', 'I-MISC']
+    multiconer_tags = ['B-PER','I-PER', 'B-PROD', 'I-PROD', 'B-GRP', 'I-GRP', 'B-CW', 'I-CW','B-CORP', 'I-CORP','B-LOC', 'I-LOC']
+    #conll_tags = ['B-PER','I-PER','B-ORG','I-ORG','B-LOC', 'I-LOC', 'B-MISC', 'I-MISC']
     
     # sep = " "
     transformer = "xlm-roberta-base"
@@ -35,11 +35,17 @@ def main(args):
     
     model = NERDA(dataset_training = get_conll_data(args.train_file, prefix='train', prop = float(args.prop)),
               dataset_validation = get_conll_data(args.dev_file),
-              tag_scheme=conll_tags, transformer = transformer, max_len=512, hyperparameters = hyper)
-    model.load_network_from_file("x_lingual/multi_es_nl_deu_xlm.bin")
+              tag_scheme=multiconer_tags, transformer = transformer, max_len=512, hyperparameters = hyper)
+
+    if args.load_model is not None:
+        model.load_network_from_file(args.load_model)
+        print("Loading model...")
+
     print(str(model.transformer))
     print("Random seed:",args.seed)
-    model.train()
+
+    if not float(args.prop) == 0 or not float(args.prop) == 0.0:
+        model.train()
 
     if args.save_model is not None:
         model.save_network(args.save_model)
@@ -71,6 +77,8 @@ if __name__ == "__main__":
     parser.add_argument("--seed", help="Random Seed, if needed", default=None)
     parser.add_argument("--epochs", help="Number of Epochs, if needed", default=None)
     parser.add_argument("--prop", help="Proportion of train data, if needed", default=None)
+
+    parser.add_argument("--load_model", help="Path to load the model from, if needed", default=None)
 
     parser.add_argument("--save_model", help="Path to save the model, if needed", default=None)
     args=parser.parse_args()
