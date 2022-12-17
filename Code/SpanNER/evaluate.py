@@ -16,15 +16,19 @@ def evaluate(ckpt, hparams_file):
 	
 	# trainer = Trainer(distributed_backend="dp")
 	args = yaml.load(Path(hparams_file).read_text(), Loader=Loader)
-	args['data_dir'] = 'data/conll_deu'
+	args['data_dir'] = 'data/conll_en'
+	args['proportion'] = 1.0
+	with open("hparams_file.yml", 'w') as outfile:
+    	   yaml.dump(args, outfile, default_flow_style=False)
 	model = BertNerTagger.load_from_checkpoint(
 		checkpoint_path=ckpt,
-		hparams_file=hparams_file,
+		hparams_file="hparams_file.yml",
 		map_location=None,
 		batch_size=1,
 		max_length=128,
 		#workers=0
 	)
+	print("0 % TRAIN DATA")
 	test_dataloader = BertNerTagger(args).get_dataloader("test")
 	trainer = Trainer(gpus=[0], distributed_backend="dp")
 	trainer.test(model=model, test_dataloaders=test_dataloader)
@@ -159,8 +163,8 @@ if __name__ == '__main__':
 	# 0125
 	# conll03 bert-large, 9245 evaluation
 	#midpath = "notetc/spanPred_bert-large-uncased_prunFalse_spLenTrue_spMorphFalse_SpWtFalse_value1_52887159"
-	midpath = "multi_new/multi_en_es_nl/spanner_bert-base-multilingual-uncased_spMLen_usePruneTrue_useSpLenTrue_useSpMorphTrue_SpWtTrue_value0.5_56241056"
-	model_names = ["epoch=7_v0.ckpt"]
+	midpath = "multi_new/multi_es_nl_deu/spanner_bert-base-multilingual-uncased_spMLen_usePruneTrue_useSpLenTrue_useSpMorphTrue_SpWtTrue_value0.5_42512787"
+	model_names = ["epoch=6.ckpt"]
 	for mn in model_names:
 		print("model-name: ", mn)
 		CHECKPOINTS = "output/train_logs/" + midpath + "/" + mn
