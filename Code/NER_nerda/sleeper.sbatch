@@ -11,7 +11,6 @@
 #SBATCH --gpus-per-task=1
 #SBATCH --comment="image=nrc/nrc_all_default_ubuntu-18.04-amd64_latest"
 
-export LD_LIBRARY_PATH=/home/aks000/u/miniconda3/envs/hgf/lib:$LD_LIBRARY_PATH
 
 echo "Sleeping for 10000 seconds..." 
 sleep 10000
