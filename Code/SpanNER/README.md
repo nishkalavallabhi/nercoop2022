@@ -85,7 +85,11 @@ To load from a checkpoint locally and continue training from there, the 'pretrai
 
 In the 'evaluate.py' file, add the path to the test set in the 'args['data_dir'] variable. To change the percentage of training data to be used, args['proportion'] can be modified.
 
-In the main function, the path to the checkpoint of the model can be added in the 'midpath' variable along with the model name.
+In the main function, the path to the checkpoint of the model can be added in the 'midpath' variable along with the model name, before running the file.
+
+```
+python evaluate.py
+```
 
 ## Bib
 
