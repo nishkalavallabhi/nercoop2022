@@ -17,7 +17,6 @@
 #SBATCH --open-mode=append
 
 #SBATCH --signal=B:15@30
-export LD_LIBRARY_PATH=/home/aks000/u/miniconda3/envs/hgf/lib:$LD_LIBRARY_PATH
 
 echo "Sleeping for 50000 seconds..." 
 sleep 50000
