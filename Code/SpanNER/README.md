@@ -69,6 +69,16 @@ Here, we give CoNLL-2003 as an example. You may need to change the `DATA_DIR`, `
 
 To load from a checkpoint locally and continue training from there, the 'pretrained_checkpoint' argument can be added to the Python command along with the path of the pretrained model. The 'proportion' argument can be modified to specify the percentage of training data to be used.
 
+SpanNER doesn't run when you submit a job to run it in GPSC, so ti run it in GPSC, you have to first submit a sleepr job by calling the 'sleeper_gpsc5.sbatch' or 'sleeper_gpsc7.sbatch' files.
+```
+sbatch sleeper_gpsc5.sbatch
+```
+Now, access the gpu node within this job using the following command. Replace 'JOB_ID' with the job id of the sleeper job.
+
+```
+srun --jobid=JOB_ID --pty bash -l
+```
+Now your terminal has access to GPU and you can run the sh file to train the Span NER model.
 ```
 ./run_conll03_spanner.sh
 ```
