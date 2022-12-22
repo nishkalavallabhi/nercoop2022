@@ -411,16 +411,17 @@ class NERDA:
         df = df.append(f1_macro)
         """
         conll_tags = ['PER', 'ORG', 'LOC', 'MISC']
-        print("Printing e.g. tags")
-        print(tags_predicted[0])
-        print(tags_predicted[1])
+        #print("Printing e.g. tags")
+        #print(tags_predicted[0])
+        #print(tags_predicted[1])
+	# CODE FOR NERVALUATE;
         evaluator = Evaluator(new_tags_true, tags_predicted, tags=conll_tags, loader="list")
         result, results_by_tag = evaluator.evaluate()
         print("PRINTING ENTITY LEVEL METRICS USING SEQEVAL")
         print(len(tags_true), len(new_tags_true), len(tags_predicted))
         myrep = classification_report(new_tags_true, tags_predicted)
-        #print(myrep)
-        #print("GOTCHA")
+        print(myrep)
+        print("GOTCHA")
         print("PRINTING NEREVALUATE RESULTS")
         print(result)
         print("PRINTING ENTITY WISE RESULTS")
