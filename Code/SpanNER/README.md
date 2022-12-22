@@ -51,12 +51,6 @@ The dataset needs to be preprocessed, before running the model.
 We provide `dataprocess/bio2spannerformat.py` for reference, which gives the CoNLL-2003 as an example. 
 First, you need to download datasets, and then convert them into BIO2 tagging format. We provided the CoNLL-2003 dataset with BIO format in the `data/conll03_bio` folder and its preprocessed format dataset in the `data/conll03` folder.
 
-The download links of the datasets used in this work are shown as follows:
-- [CoNLL-2003](https://www.clips.uantwerpen.be/conll2003/ner/)
-- [CoNLL-2002](https://www.clips.uantwerpen.be/conll2002/ner/)
-- [OntoNotes 5.0](https://catalog.ldc.upenn.edu/LDC2013T19)
-- [WNUT-2016](http://noisy-text.github.io/2016/ner-shared-task.html)
-- [WNUT-2017](http://noisy-text.github.io/2017/emerging-rare-entities.html)
 
 
 
@@ -65,8 +59,6 @@ The download links of the datasets used in this work are shown as follows:
 For English Datasets, we use [BERT-Large](https://github.com/google-research/bert).
 
 For Dutch and Spanish Datasets, we use [BERT-Multilingual-Base](https://huggingface.co/bert-base-multilingual-uncased).
-
-
 
 
 
