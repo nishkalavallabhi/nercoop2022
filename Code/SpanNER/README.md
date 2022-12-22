@@ -73,13 +73,19 @@ For Dutch and Spanish Datasets, we use [BERT-Multilingual-Base](https://huggingf
 
 ## How to Run?
 
-Here, we give CoNLL-2003 as an example. You may need to change the `DATA_DIR`, `PRETRAINED`, `dataname`, and `n_class` to your own dataset path, pre-trained model path, dataset name, and the number of labels in the dataset, respectively.
+Here, we give CoNLL-2003 as an example. You may need to change the `DATA_DIR`, `PRETRAINED`, `dataname`, and `n_class` to your own dataset path, pre-trained model path, dataset name, and the number of labels in the dataset, respectively. 
+
+To load from a checkpoint locally and continue training from there, the 'pretrained_checkpoint' argument can be added to the Python command along with the path of the pretrained model. The 'proportion' argument can be modified to specify the percentage of training data to be used.
 
 ```
 ./run_conll03_spanner.sh
 ```
 
+## How to evaluate ?
 
+In the 'evaluate.py' file, add the path to the test set in the 'args['data_dir'] variable. To change the percentage of training data to be used, args['proportion'] can be modified.
+
+In the main function, the path to the checkpoint of the model can be added in the 'midpath' variable along with the model name.
 
 ## Bib
 
