@@ -1,2 +1,2 @@
 # nercoop2022
-Summer Co-op project with Akshay Srinivasan
+Akshay Srinivasan's Summer and Fall 2022 coop terms research
